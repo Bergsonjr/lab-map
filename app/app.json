@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "LAB.",
-    "slug": "LAB.",
+    "name": "LAB",
+    "slug": "LAB",
     "platforms": [
       "ios",
       "android",
@@ -13,7 +13,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0A2739"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
