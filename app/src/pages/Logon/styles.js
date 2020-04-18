@@ -15,7 +15,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     input: {
-        height: 60,
+        height: 50,
         margin: 10,
         padding: 10,
         width: '100%',
@@ -32,11 +32,13 @@ export default StyleSheet.create({
         color: '#FFFFFF',
     },
     login: {
-        marginTop: 15,
-        alignItems: "center",
-        backgroundColor: "#D7EEFC",
         padding: 10,
-        width: '100%'
+        width: '100%',
+        height: 50,
+        marginTop: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: "#D7EEFC",
     },
     loginText: {
         color: '#0A2739',
