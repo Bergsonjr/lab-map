@@ -12,9 +12,14 @@ module.exports = {
     }),
 
     registerStoreValidator: celebrate({
-        [Segments.HEADERS]: Joi.object({
-            authorization: Joi.string().required(),
-        }).unknown(),
+        [Segments.BODY]: Joi.object().keys({
+            name: Joi.string().required(),
+            email: Joi.string().required().email(),
+            phone: Joi.string().required().min(10),
+            login: Joi.string().required(),
+            password: Joi.string().required(),
+            document: Joi.string().required(),
+        }),
     }),
 
     registerPutValidator: celebrate({
@@ -42,7 +47,8 @@ module.exports = {
 
     sessionStoreValidator: celebrate({
         [Segments.BODY]: Joi.object().keys({
-            id: Joi.string().required(),
+            login: Joi.string().required(),
+            password: Joi.string().required(),
         }),
     }),
 };
