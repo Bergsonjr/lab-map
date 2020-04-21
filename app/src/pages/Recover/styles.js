@@ -5,25 +5,23 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 20,
-        alignItems: 'center',
         paddingHorizontal: 24,
         backgroundColor: '#0A2739',
         paddingTop: Constants.statusBarHeight + 20
     },
-    body:{
+    header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    logo: {
-        width: 200,
-        height: 200,
-        marginTop: 25,
-        resizeMode: 'contain',
+    body: {
+        marginBottom: 8,
+        marginTop: 8
     },
     input: {
         height: 50,
-        margin: 8,
+        marginTop: 8,
+        marginBottom: 8,
         padding: 10,
         width: '100%',
         borderWidth: .5,
@@ -33,14 +31,7 @@ export default StyleSheet.create({
         borderColor: '#FFF',
         backgroundColor: 'transparent',
     },
-    forgotPassword: {
-        margin: 8,
-    },
-    forgotPasswordText: {
-        color: '#FFFFFF',
-    },
-    login: {
-        padding: 10,
+    recover: {
         width: '100%',
         height: 50,
         marginTop: 8,
@@ -49,19 +40,20 @@ export default StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: "#D7EEFC",
     },
-    loginText: {
+    title: {
+        fontSize: 30,
+        marginBottom: 8,
+        marginTop: 16,
+        fontWeight: 'bold',
+        color: '#FFF'
+    },
+    recoverText: {
         color: '#0A2739',
         fontWeight: 'bold'
     },
-    register: {
-        marginTop: 16,
-        alignItems: 'center'
-    },
-    registerText: {
-        color: '#FFFFFF'
-    },
-    registerLinkText: {
-        fontSize: 14,
-        fontWeight: 'bold'
-    },
+    back:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    }
 })

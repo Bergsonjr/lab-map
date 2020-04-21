@@ -45,7 +45,7 @@ module.exports = {
         try {
             const { id } = req.params;
 
-            const [user] = await connection('user').where({ id }).del();
+            await connection('user').where({ id }).del();
 
             res.status(204).send('Usuário deletado').end();
         } catch (error) {
