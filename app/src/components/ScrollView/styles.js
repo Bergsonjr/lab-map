@@ -11,8 +11,5 @@ export const Container = styled.ScrollView.attrs(() => ({
 `;
 
 export const Option = styled.TouchableOpacity({
-  height: 75,
-  width: 125,
   marginLeft: 8,
-  borderRadius: 8,
 });

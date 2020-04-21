@@ -59,6 +59,7 @@ export default StyleSheet.create({
     card: {
         width: 125,
         height: 75,
+        borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: "#D7EEFC",
