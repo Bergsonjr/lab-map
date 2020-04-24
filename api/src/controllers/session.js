@@ -8,10 +8,10 @@ module.exports = {
             const user = await connection('user').where({ login, password });
 
             if (!user) {
-                return res.status(404).json({ error: 'Usuário não encontrado' });
+                return res.status(400).json({ error: 'Login e/ou senha incorretos' });
             }
 
-            return res.status(201).json(user);
+            return res.status(201).json({ user });
         } catch (error) {
             return res.status(400).json(error);
         }

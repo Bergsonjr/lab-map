@@ -1,15 +1,7 @@
 const { celebrate, Segments, Joi } = require('celebrate');
 
 module.exports = {
-    registerIndexValidator: celebrate({
-        [Segments.BODY]: Joi.object().keys({
-            name: Joi.string().required(),
-            email: Joi.string().required().email(),
-            whatsapp: Joi.string().required().min(10),
-            city: Joi.string().required(),
-            uf: Joi.string().required().length(2),
-        }),
-    }),
+    /* REGISTER CONTROLLER VALIDATOR - START */
 
     registerStoreValidator: celebrate({
         [Segments.BODY]: Joi.object().keys({
@@ -23,27 +15,19 @@ module.exports = {
     }),
 
     registerPutValidator: celebrate({
-        [Segments.QUERY]: Joi.object().keys({
-            page: Joi.number(),
-        }),
-    }),
-
-    registerDeleteValidator: celebrate({
         [Segments.BODY]: Joi.object().keys({
-            title: Joi.string().required(),
-            description: Joi.string().required(),
-            value: Joi.number().required(),
+            name: Joi.string().required(),
+            email: Joi.string().required().email(),
+            phone: Joi.string().required().min(10),
+            login: Joi.string().required(),
+            password: Joi.string().required(),
+            document: Joi.string().required(),
         }),
-        [Segments.HEADERS]: Joi.object({
-            authorization: Joi.string().required(),
-        }).unknown(),
     }),
 
-    incidentsDeleteValidator: celebrate({
-        [Segments.PARAMS]: Joi.object().keys({
-            id: Joi.number().required(),
-        }),
-    }),
+    /* REGISTER CONTROLLER VALIDATOR - END */
+
+    /* SESSION CONTROLLER VALIDATOR - START */
 
     sessionStoreValidator: celebrate({
         [Segments.BODY]: Joi.object().keys({
@@ -51,4 +35,38 @@ module.exports = {
             password: Joi.string().required(),
         }),
     }),
+
+    /* SESSION CONTROLLER VALIDATOR - END */
+
+    /* CATEGORY CONTROLLER VALIDATOR - START */
+
+    categoryStoreValidator: celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            name: Joi.string().required(),
+        }),
+    }),
+
+    categoryPutValidator: celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            name: Joi.string().required(),
+        }),
+    }),
+
+    /* CATEGORY CONTROLLER VALIDATOR - END */
+
+    /* STATUS CONTROLLER VALIDATOR - START */
+
+    statusStoreValidator: celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            name: Joi.string().required(),
+        }),
+    }),
+
+    statusPutValidator: celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            name: Joi.string().required(),
+        }),
+    }),
+
+    /* STATUS CONTROLLER VALIDATOR - END */
 };

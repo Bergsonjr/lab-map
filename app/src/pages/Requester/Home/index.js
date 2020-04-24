@@ -9,6 +9,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
+  FlatList,
 } from "react-native";
 
 import { Container, Option } from "../../../components/ScrollView/styles";
@@ -34,6 +35,28 @@ function Home() {
   function navigateBack() {
     navigation.goBack();
   }
+
+  function navigateToDetail(equipment) {
+    console.log(equipment);
+  }
+
+  const equipments = [
+    {
+      id: "82900SA",
+      name: "Sony Alpha a6400",
+      status: "Disponível",
+    },
+    {
+      id: "8522CA",
+      name: "Canon EOS 6D Mark II",
+      status: "Indisponível",
+    },
+    {
+      id: "86209NK",
+      name: "Nikon D750",
+      status: "Disponível",
+    },
+  ];
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -68,7 +91,7 @@ function Home() {
             </Option>
             <Option>
               <View style={styles.card}>
-                <Text style={styles.cardText}>Lenter</Text>
+                <Text style={styles.cardText}>Lentes</Text>
               </View>
             </Option>
             <Option>
@@ -77,6 +100,50 @@ function Home() {
               </View>
             </Option>
           </Container>
+
+          <FlatList
+            data={equipments}
+            style={styles.equipmentList}
+            keyExtractor={(equipment) => String(equipment.id)}
+            showsVerticalScrollIndicator={false}
+            onEndReached={() => {}}
+            onEndReachedThreshold={0.2}
+            renderItem={({ item: equipment }) => (
+              <View style={styles.equipment}>
+                <View style={styles.equipmentImage}>
+                  <Image style={styles.equipmentPhoto} source={profileImg}></Image>
+                </View>
+                <View style={styles.equipmentInfo}>
+                  <Text style={styles.equipmentName}>{equipment.name}</Text>
+                  <Text style={styles.equipmentProperty}>
+                    Código:
+                    <Text style={styles.equipmentValue}> {equipment.id}</Text>
+                  </Text>
+                  <Text style={styles.equipmentProperty}>
+                    Status:
+                    <Text style={styles.equipmentValue}>
+                      {equipment.status}
+                    </Text>
+                  </Text>
+                </View>
+
+                <View style={styles.equipmentDetail}>
+                  <TouchableOpacity
+                    style={styles.detailsButton}
+                    onPress={() => {
+                      navigateToDetail(equipment);
+                    }}
+                  >
+                    <Feather
+                      name="chevron-right"
+                      size={36}
+                      color="#0A2739"
+                    ></Feather>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>
