@@ -1,5 +1,5 @@
 const connection = require('../database/connection');
-const { generateUniqueId } = require('../utils');
+const { generateUniqueId, createHash } = require('../utils');
 
 module.exports = {
     async index(req, res) {
@@ -20,9 +20,9 @@ module.exports = {
     async store(req, res) {
         try {
             const id = generateUniqueId();
-            const { name, email, phone, login, password, document } = req.body;
+            const { name, email, phone, login, password, doc } = req.body;
 
-            await connection('user').insert({ id, name, email, phone, login, password, document });
+            await connection('user').insert({ id, name, email, phone, login, password: createHash(password), doc });
             console.log(id, 'id');
             res.status(201).json({ id }).end();
         } catch (error) {
@@ -34,7 +34,7 @@ module.exports = {
         try {
             const { id } = req.params;
 
-            await connection('user').where({ id }).update({ id, name, email, phone, login, password, document });
+            await connection('user').where({ id }).update({ id, name, email, phone, login, password, doc });
 
             res.status(204).send('Usuário atualizado').end();
         } catch (error) {

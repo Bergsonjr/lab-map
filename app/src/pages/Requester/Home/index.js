@@ -38,6 +38,7 @@ function Home() {
 
   function navigateToDetail(equipment) {
     console.log(equipment);
+    navigation.navigate("RequesterLoan", { equipment });
   }
 
   const equipments = [
@@ -111,7 +112,10 @@ function Home() {
             renderItem={({ item: equipment }) => (
               <View style={styles.equipment}>
                 <View style={styles.equipmentImage}>
-                  <Image style={styles.equipmentPhoto} source={profileImg}></Image>
+                  <Image
+                    style={styles.equipmentPhoto}
+                    source={profileImg}
+                  ></Image>
                 </View>
                 <View style={styles.equipmentInfo}>
                   <Text style={styles.equipmentName}>{equipment.name}</Text>

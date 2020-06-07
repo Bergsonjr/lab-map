@@ -12,6 +12,8 @@ import {
 } from "react-native";
 
 import styles from "./styles";
+
+import api from "../../service/api";
 function Register() {
   const navigation = useNavigation();
 
@@ -22,8 +24,19 @@ function Register() {
   const [password, setPassword] = useState();
   const [password_confirm, setPasswordConfirm] = useState();
 
-  function handleRegister() {
+  async function handleRegister() {
     console.log(name, email, phone, puc_id, password, password_confirm);
+    if (password == password_confirm) {
+      const response = await api.post("register", {
+        name,
+        email,
+        phone,
+        login,
+        password,
+      });
+
+      console.log(response, 'response in register')
+    }
   }
 
   function navigateBack() {

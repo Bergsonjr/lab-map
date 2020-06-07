@@ -6,7 +6,7 @@ export default StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     alignItems: "center",
-    paddingHorizontal: 24,
+    paddingHorizontal: 12,
     backgroundColor: "#0A2739",
     paddingTop: Constants.statusBarHeight + 20,
   },

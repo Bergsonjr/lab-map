@@ -10,6 +10,7 @@ import Recover from './pages/Recover'
 import Register from './pages/Register'
 
 import RequesterHome from './pages/Requester/Home'
+import RequesterLoan from './pages/Requester/Loan'
 
 function Routes() {
     return (
@@ -19,6 +20,7 @@ function Routes() {
                 <AppStack.Screen name="Recover" component={Recover}></AppStack.Screen>
                 <AppStack.Screen name="Register" component={Register}></AppStack.Screen>
                 <AppStack.Screen name="RequesterHome" component={RequesterHome}></AppStack.Screen>
+                <AppStack.Screen name="RequesterLoan" component={RequesterLoan}></AppStack.Screen>
             </AppStack.Navigator>
         </NavigationContainer>
     )
