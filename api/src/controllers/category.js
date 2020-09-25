@@ -30,6 +30,7 @@ module.exports = {
     async update(req, res) {
         try {
             const { id } = req.params;
+            const { name } = req.body;
 
             await connection('category').where({ id }).update({ name });
 

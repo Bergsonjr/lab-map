@@ -18,11 +18,11 @@ module.exports = {
     },
     async store(req, res) {
         try {
-            const { name } = req.body;
+            const { name, description, id_category, id_status } = req.body;
 
-            await connection('equipment').insert({ name });
+            await connection('equipment').insert({ name, description, id_category, id_status });
 
-            res.status(201).json({ name }).end();
+            res.status(201).json({ name, description, id_category, id_status }).end();
         } catch (error) {
             res.status(400).json({ error }).end();
         }
@@ -30,8 +30,9 @@ module.exports = {
     async update(req, res) {
         try {
             const { id } = req.params;
+            const { name, description, id_category, id_status } = req.body;
 
-            await connection('equipment').where({ id }).update({ name });
+            await connection('equipment').where({ id }).update({ name, description, id_category, id_status });
 
             res.status(204).send('Equipamento atualizado').end();
         } catch (error) {

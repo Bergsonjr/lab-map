@@ -10,7 +10,7 @@ module.exports = {
             phone: Joi.string().required().min(10),
             login: Joi.string().required(),
             password: Joi.string().required(),
-            doc: Joi.string().required(),
+            // doc: Joi.string().required(),
         }),
     }),
 
@@ -21,7 +21,7 @@ module.exports = {
             phone: Joi.string().required().min(10),
             login: Joi.string().required(),
             password: Joi.string().required(),
-            doc: Joi.string().required(),
+            // doc: Joi.string().required(),
         }),
     }),
 
