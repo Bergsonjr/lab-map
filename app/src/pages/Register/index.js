@@ -20,12 +20,12 @@ function Register() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState();
-  const [puc_id, setPucId] = useState();
+  const [login, setLogin] = useState();
   const [password, setPassword] = useState();
   const [password_confirm, setPasswordConfirm] = useState();
 
   async function handleRegister() {
-    console.log(name, email, phone, puc_id, password, password_confirm);
+    console.log(name, email, phone, login, password, password_confirm);
     if (password == password_confirm) {
       const response = await api.post("register", {
         name,
@@ -35,7 +35,7 @@ function Register() {
         password,
       });
 
-      console.log(response, 'response in register')
+      console.log(response, "response in register");
     }
   }
 
@@ -82,8 +82,8 @@ function Register() {
           />
           <TextInput
             style={styles.input}
-            value={puc_id}
-            onChangeText={(value) => setPucId(value)}
+            value={login}
+            onChangeText={(value) => setLogin(value)}
             placeholder="Matrícula"
             keyboardAppearance="dark"
             selectionColor="#FFF"
@@ -112,17 +112,19 @@ function Register() {
           />
 
           <TouchableOpacity style={styles.register} onPress={handleRegister}>
-            <Text style={styles.registerText}>Registrar</Text>
+            <Text style={styles.registerText}>Cadastrar</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.login}
-            onPress={() => navigation.navigate("Logon")}
-          >
-            <Text style={styles.loginText}>
-              Já possui cadastro?{" "}
-              <Text style={styles.loginLinkText}>Login</Text>
-            </Text>
-          </TouchableOpacity>
+          <View style={styles.cardLogin}>
+            <TouchableOpacity
+              style={styles.login}
+              onPress={() => navigation.navigate("Logon")}
+            >
+              <Text style={styles.loginText}>
+                Já possui cadastro?{" "}
+                <Text style={styles.loginLinkText}>Login</Text>
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </TouchableWithoutFeedback>

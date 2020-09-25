@@ -32,6 +32,9 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  label: {
+    flex: 1,
+  },
   input: {
     height: 50,
     marginTop: 10,
@@ -40,10 +43,10 @@ export default StyleSheet.create({
     width: "100%",
     borderWidth: 0.5,
     borderRadius: 8,
-    color: "#FFFFFF",
-    textAlign: "center",
-    borderColor: "#FFF",
-    backgroundColor: "transparent",
+    color: "#0A2739",
+    textAlign: "left",
+    borderColor: "#0A2739",
+    backgroundColor: "#FFF",
   },
   card: {
     width: "100%",
@@ -58,6 +61,7 @@ export default StyleSheet.create({
   cardHeaderText: {
     color: "#0A2739",
     fontWeight: "bold",
+    fontSize: 20,
   },
   cardBody: {
     padding: 16,

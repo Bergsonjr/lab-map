@@ -45,17 +45,17 @@ function Home() {
     {
       id: "82900SA",
       name: "Sony Alpha a6400",
-      status: "Disponível",
+      status: 1,
     },
     {
       id: "8522CA",
       name: "Canon EOS 6D Mark II",
-      status: "Indisponível",
+      status: 0,
     },
     {
       id: "86209NK",
       name: "Nikon D750",
-      status: "Disponível",
+      status: 1,
     },
   ];
 
@@ -126,14 +126,18 @@ function Home() {
                   <Text style={styles.equipmentProperty}>
                     Status:
                     <Text style={styles.equipmentValue}>
-                      {equipment.status}
+                      {equipment.status ? "Disponível" : "Indisponível"}
                     </Text>
                   </Text>
                 </View>
 
-                <View style={styles.equipmentDetail}>
+                <View
+                  style={styles.equipmentDetail}
+                  opacity={equipment.status ? 1 : 0.5}
+                >
                   <TouchableOpacity
                     style={styles.detailsButton}
+                    disabled={!equipment.status}
                     onPress={() => {
                       navigateToDetail(equipment);
                     }}

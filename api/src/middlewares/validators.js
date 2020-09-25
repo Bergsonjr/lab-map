@@ -69,4 +69,48 @@ module.exports = {
     }),
 
     /* STATUS CONTROLLER VALIDATOR - END */
+
+    /* EQUIPMENT CONTROLLER VALIDATOR - START */
+
+    equipmentStoreValidator: celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            name: Joi.string().required(),
+            id_status: Joi.number().required(),
+            description: Joi.string().required(),
+            id_category: Joi.number().required(),
+        }),
+    }),
+
+    equipmentPutValidator: celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            name: Joi.string().required(),
+            id_status: Joi.number().required(),
+            description: Joi.string().required(),
+            id_category: Joi.number().required(),
+        }),
+    }),
+
+    /* EQUIPMENT CONTROLLER VALIDATOR - END */
+
+    /* LEND CONTROLLER VALIDATOR - START */
+
+    lendStoreValidator: celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            status: Joi.number().required(),
+            id_approver: Joi.number().required(),
+            id_equipment: Joi.number().required(),
+            id_requester: Joi.number().required(),
+        }),
+    }),
+
+    lendPutValidator: celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            status: Joi.number().required(),
+            id_approver: Joi.number().required(),
+            id_equipment: Joi.number().required(),
+            id_requester: Joi.number().required(),
+        }),
+    }),
+
+    /* LEND CONTROLLER VALIDATOR - END */
 };

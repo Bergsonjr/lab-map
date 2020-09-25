@@ -1,9 +1,9 @@
 const equipment = require('express').Router();
-const statusController = require('../controllers/status');
-const { statusStoreValidator, statusPutValidator } = require('../middlewares/validators');
+const equipmentController = require('../controllers/equipment');
+const { equipmentStoreValidator, equipmentPutValidator } = require('../middlewares/validators');
 
-equipment.route('/status').post(statusStoreValidator, statusController.store);
+equipment.route('/equipment').post(equipmentStoreValidator, equipmentController.store);
 
-equipment.route('status/:id').get(statusController.index).put(statusPutValidator, statusController.update).delete(statusController.delete);
+equipment.route('equipment/:id').get(equipmentController.index).put(equipmentPutValidator, equipmentController.update).delete(equipmentController.delete);
 
 module.exports = equipment;

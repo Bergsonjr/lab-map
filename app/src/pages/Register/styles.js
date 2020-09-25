@@ -44,6 +44,7 @@ export default StyleSheet.create({
     color: "#0A2739",
     fontWeight: "bold",
   },
+  cardLogin: {},
   login: {
     marginTop: 16,
     alignItems: "center",

@@ -21,13 +21,14 @@ function Home() {
   const equipment = route.params.equipment;
   const [name, setName] = useState();
   const [email, setEmail] = useState();
-  const [phone, setPhone] = useState();
+
+  const [days, setDays] = useState();
   const [puc_id, setPucId] = useState();
-  const [password, setPassword] = useState();
+  const [description, setDescription] = useState();
   const [isAccording, setIsAccording] = useState(false);
 
   function handleLoan() {
-    console.log(name, email, phone, puc_id, password);
+    console.log(name, email, description, puc_id, days);
   }
 
   function navigateBack() {
@@ -45,11 +46,43 @@ function Home() {
         <View style={styles.body}>
           <View style={styles.card}>
             <View style={styles.cardHeader}>
-              <Text style={styles.cardText}>{equipment.name}</Text>
-              <Text style={styles.cardText}>Status: {equipment.status}</Text>
+              <Text style={styles.cardHeaderText}>{equipment.name}</Text>
+              <Text style={styles.cardText}>
+                Status: {equipment.status ? "Disponível" : "Indisponível"}
+              </Text>
               <Text style={styles.cardText}>Código: {equipment.id}</Text>
             </View>
-            <View style={styles.cardBody}></View>
+            <View style={styles.cardBody}>
+              <Text style={styles.label}>Matrícula</Text>
+              <TextInput
+                style={styles.input}
+                value={puc_id}
+                onChangeText={(value) => setPucId(value)}
+                keyboardAppearance="dark"
+                selectionColor="#0A2739"
+                placeholderTextColor="#0A2739"
+              />
+              <Text style={styles.label}>Dias de empréstimo</Text>
+              <TextInput
+                style={styles.input}
+                value={days}
+                onChangeText={(value) => setDays(value)}
+                keyboardAppearance="dark"
+                selectionColor="#0A2739"
+                placeholderTextColor="#0A2739"
+              />
+              <Text style={styles.label}>Descrição</Text>
+              <TextInput
+                style={styles.input}
+                value={description}
+                multiline={true}
+                numberOfLines={10}
+                onChangeText={(value) => setDescription(value)}
+                keyboardAppearance="dark"
+                selectionColor="#0A2739"
+                placeholderTextColor="#0A2739"
+              />
+            </View>
             <View style={styles.cardFooter}>
               <CheckBox
                 value={isAccording}

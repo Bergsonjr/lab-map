@@ -1,5 +1,5 @@
 exports.up = function (knex) {
-    return knex.schema.createTable('loan', function (table) {
+    return knex.schema.createTable('lend', function (table) {
         table.increments('id').primary();
 
         table.string('status').notNullable();
@@ -16,5 +16,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('loan');
+    return knex.schema.dropTable('lend');
 };
