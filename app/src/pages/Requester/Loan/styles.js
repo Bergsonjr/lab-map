@@ -48,6 +48,19 @@ export default StyleSheet.create({
     borderColor: "#0A2739",
     backgroundColor: "#FFF",
   },
+  textArea: {
+    height: 50,
+    marginTop: 10,
+    marginBottom: 10,
+    padding: 10,
+    width: "100%",
+    borderWidth: 0.5,
+    borderRadius: 8,
+    color: "#0A2739",
+    textAlign: "left",
+    borderColor: "#0A2739",
+    backgroundColor: "#FFF",
+  },
   card: {
     width: "100%",
     height: "97%",
@@ -55,8 +68,12 @@ export default StyleSheet.create({
     backgroundColor: "#D7EEFC",
   },
   cardHeader: {
-    padding: 16,
-    height: "25%",
+    flex: 1,
+    margin: 20,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    borderBottomWidth: 1,
+    borderBottomColor:"#FFF",
   },
   cardHeaderText: {
     color: "#0A2739",
@@ -77,6 +94,7 @@ export default StyleSheet.create({
   cardFooterText: {
     color: "#0A2739",
     fontWeight: "bold",
+    margin: 8,
   },
   cardFooterButton: {
     bottom: 0,
@@ -89,10 +107,30 @@ export default StyleSheet.create({
   },
   cardFooterButtonText: {
     fontSize: 14,
+    margin: 8,
     color: "#FFF",
     fontWeight: "bold",
   },
+  checkboxContainer: {
+    flexDirection: "row",
+    marginBottom: 20,
+  },
   checkbox: {
     alignSelf: "center",
+  },
+  equipmentImage: {
+    alignContent: "flex-start",
+    justifyContent: "center",
+    width: "20%",
+  },
+  equipmentPhoto: {
+    width: 60,
+    height: 60,
+    borderRadius: 8,
+  },
+  equipmentInfo: {
+    alignContent: "flex-start",
+    justifyContent: "center",
+    width: "80%",
   },
 });

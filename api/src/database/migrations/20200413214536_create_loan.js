@@ -5,13 +5,16 @@ exports.up = function (knex) {
         table.string('status').notNullable();
         table.string('description').notNullable();
 
-        table.foreign('id_equipment').references('id').inTable('equipment');
-        table.foreign('id_requester').references('id').inTable('requester');
-        table.foreign('id_approver').references('id').inTable('approver');
+        table.integer('id_equipment').notNullable();
+        table.integer('id_requester').notNullable();
+        table.integer('id_approver').notNullable();
 
-        table.timestamp('created_at', { precision: 6 }).defaultTo(knex.fn.now(6));
-        table.timestamp('updated_at', { precision: 6 }).defaultTo(knex.fn.now(6));
-        table.timestamp('deleted_at', { precision: 6 }).defaultTo(knex.fn.now(6));
+        table.timestamp('created_at').notNullable().defaultTo(knex.raw('current_timestamp'));
+        table.timestamp('updated_at').notNullable().defaultTo(knex.raw('current_timestamp'));
+
+        table.foreign('id_equipment').references('id').inTable('equipment');
+        table.foreign('id_requester').references('user_id').inTable('requester');
+        table.foreign('id_approver').references('user_id').inTable('approver');
     });
 };
 

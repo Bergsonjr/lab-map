@@ -23,7 +23,7 @@ module.exports = {
             const { name, email, phone, login, password, doc } = req.body;
 
             await connection('user').insert({ id, name, email, phone, login, password: createHash(password) });
-            console.log(id, 'id');
+            
             res.status(201).json({ id }).end();
         } catch (error) {
             console.log(error);

@@ -9,9 +9,9 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
-  CheckBox,
 } from "react-native";
 
+import { Checkbox } from "react-native-paper";
 import profileImg from "../../../assets/henri-bergson.png";
 
 import styles from "./styles";
@@ -46,11 +46,19 @@ function Home() {
         <View style={styles.body}>
           <View style={styles.card}>
             <View style={styles.cardHeader}>
-              <Text style={styles.cardHeaderText}>{equipment.name}</Text>
-              <Text style={styles.cardText}>
-                Status: {equipment.status ? "Disponível" : "Indisponível"}
-              </Text>
-              <Text style={styles.cardText}>Código: {equipment.id}</Text>
+              <View style={styles.equipmentImage}>
+                <Image
+                  style={styles.equipmentPhoto}
+                  source={profileImg}
+                ></Image>
+              </View>
+              <View style={styles.equipmentInfo}>
+                <Text style={styles.cardHeaderText}>{equipment.name}</Text>
+                <Text style={styles.cardText}>
+                  Status: {equipment.status ? "Disponível" : "Indisponível"}
+                </Text>
+                <Text style={styles.cardText}>Código: {equipment.id}</Text>
+              </View>
             </View>
             <View style={styles.cardBody}>
               <Text style={styles.label}>Matrícula</Text>
@@ -73,7 +81,7 @@ function Home() {
               />
               <Text style={styles.label}>Descrição</Text>
               <TextInput
-                style={styles.input}
+                style={styles.textArea}
                 value={description}
                 multiline={true}
                 numberOfLines={10}
@@ -84,16 +92,21 @@ function Home() {
               />
             </View>
             <View style={styles.cardFooter}>
-              <CheckBox
-                value={isAccording}
-                onValueChange={setIsAccording}
-                styles={styles.checkbox}
-              >
+              <View style={styles.checkboxContainer}>
+                <Checkbox.Android
+                  status={isAccording ? "checked" : "unchecked"}
+                  onPress={() => setIsAccording(!isAccording)}
+                  style={styles.checkbox}
+                  color="#0A2739"
+                />
                 <Text style={styles.cardFooterText}>
                   Concordo com os termos de uso.
                 </Text>
-              </CheckBox>
-              <TouchableOpacity style={styles.cardFooterButton}>
+              </View>
+              <TouchableOpacity
+                style={styles.cardFooterButton}
+                onPress={handleLoan}
+              >
                 <Text style={styles.cardFooterButtonText}>
                   Solicitar empréstimo
                 </Text>

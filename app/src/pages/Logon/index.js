@@ -30,6 +30,9 @@ function Logon() {
         // se for do tipo solicitante
         navigation.navigate("RequesterHome", { user });
       }
+      else{
+        navigation.navigate("RequesterHome", { user });
+      }
     }
   }
 
