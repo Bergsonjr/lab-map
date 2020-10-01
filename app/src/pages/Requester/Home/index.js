@@ -15,12 +15,13 @@ import {
 import { Container, Option } from "../../../components/ScrollView/styles";
 
 import profileImg from "../../../assets/henri-bergson.png";
-
+import AsyncStorage from "@react-native-community/async-storage";
 import styles from "./styles";
-function Home() {
+async function Home() {
   const navigation = useNavigation();
   const route = useRoute();
-  const user = route.params.user;
+  const storage = await AsyncStorage.getItem("user")
+  const user = JSON.parse(storage);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState();

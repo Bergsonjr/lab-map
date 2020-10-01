@@ -15,10 +15,9 @@ import { Checkbox } from "react-native-paper";
 import profileImg from "../../../assets/henri-bergson.png";
 
 import styles from "./styles";
-function Lend() {
+function Home() {
   const navigation = useNavigation();
   const route = useRoute();
-  // const equipment = route.params.equipment;
   const [name, setName] = useState();
   const [email, setEmail] = useState();
 
@@ -119,4 +118,4 @@ function Lend() {
   );
 }
 
-export default Lend;
+export default Home;

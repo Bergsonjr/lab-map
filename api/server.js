@@ -2,10 +2,12 @@
 const compression = require('compression');
 const { errors } = require('celebrate');
 const express = require('express');
+const helmet = require('helmet');
 const cors = require('cors');
 const server = express();
 
 server.use(cors());
+server.use(helmet());
 server.use(compression());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));

@@ -10,31 +10,22 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
+import { AuthContext } from "../../components/Context";
+
 import styles from "./styles";
 
 import logoImg from "../../assets/logo.png";
 
 function Logon() {
   const navigation = useNavigation();
-  const [userId, setUserId] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin() {
-    console.log(userId, password);
-    if (true) {
-      // Se as validações estiverem ok
-      const user = {
-        name: "Henri Bergson",
-      };
-      if (true) {
-        // se for do tipo solicitante
-        navigation.navigate("RequesterHome", { user });
-      }
-      else{
-        navigation.navigate("RequesterHome", { user });
-      }
-    }
-  }
+  const { signIn } = React.useContext(AuthContext);
+
+  const handleLogin = (login, password) => {
+    signIn(login, password);
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -43,12 +34,11 @@ function Logon() {
 
         <TextInput
           style={styles.input}
-          value={userId}
-          onChangeText={(value) => setUserId(value)}
-          placeholder="Matrícula"
+          value={login}
+          onChangeText={(value) => setLogin(value)}
+          placeholder="Login"
           keyboardAppearance="dark"
           selectionColor="#FFF"
-          keyboardType="numeric"
           placeholderTextColor="#FFF"
         />
         <TextInput
@@ -68,7 +58,10 @@ function Logon() {
         >
           <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.login} onPress={handleLogin}>
+        <TouchableOpacity
+          style={styles.login}
+          onPress={() => handleLogin(login, password)}
+        >
           <Text style={styles.loginText}>Entrar</Text>
         </TouchableOpacity>
         <TouchableOpacity
