@@ -15,27 +15,14 @@ import {
 import { Container, Option } from "../../../components/ScrollView/styles";
 
 import profileImg from "../../../assets/henri-bergson.png";
-import AsyncStorage from "@react-native-community/async-storage";
+import { getItem } from "../../../utils";
 import styles from "./styles";
 async function Home() {
   const navigation = useNavigation();
   const route = useRoute();
-  const storage = await AsyncStorage.getItem("user")
-  const user = JSON.parse(storage);
+  const storage = await getItem("user");
+  console.log(storage, "storage in home");
   const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [phone, setPhone] = useState();
-  const [puc_id, setPucId] = useState();
-  const [password, setPassword] = useState();
-  const [password_confirm, setPasswordConfirm] = useState();
-
-  function handleRegister() {
-    console.log(name, email, phone, puc_id, password, password_confirm);
-  }
-
-  function navigateBack() {
-    navigation.goBack();
-  }
 
   function navigateToDetail(equipment) {
     console.log(equipment);

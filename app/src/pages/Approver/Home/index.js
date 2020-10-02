@@ -26,14 +26,6 @@ function Home() {
   const [description, setDescription] = useState();
   const [isAccording, setIsAccording] = useState(false);
 
-  function handleLoan() {
-    console.log(name, email, description, puc_id, days);
-  }
-
-  function navigateBack() {
-    navigation.goBack();
-  }
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>

@@ -16,6 +16,8 @@ import styles from "./styles";
 
 import logoImg from "../../assets/logo.png";
 
+import api from "../../service/api";
+
 function Logon() {
   const navigation = useNavigation();
   const [login, setLogin] = useState("");
@@ -23,8 +25,19 @@ function Logon() {
 
   const { signIn } = React.useContext(AuthContext);
 
-  const handleLogin = (login, password) => {
-    signIn(login, password);
+  const handleLogin = async (login, password) => {
+    try {
+      console.log(login, password);
+      const { data } = await api.post("session", {
+        login,
+        password,
+      });
+
+      const { user, auth, token } = data;
+      signIn({ user, auth, token });
+    } catch (error) {
+      console.log(error, "error in session");
+    }
   };
 
   return (
