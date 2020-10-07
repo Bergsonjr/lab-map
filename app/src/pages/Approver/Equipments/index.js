@@ -11,24 +11,29 @@ import {
   Keyboard,
 } from "react-native";
 
-import { Checkbox } from "react-native-paper";
-import profileImg from "../../../assets/henri-bergson.png";
-
 import styles from "./styles";
+
+import api from "../../../service/api";
 function Equipment() {
   const navigation = useNavigation();
-  const route = useRoute();
-  // const equipment = route.params.equipment;
+
   const [name, setName] = useState();
-  const [email, setEmail] = useState();
-
-  const [days, setDays] = useState();
-  const [puc_id, setPucId] = useState();
+  const [id, setId] = useState();
+  const [category, setCategory] = useState();
   const [description, setDescription] = useState();
-  const [isAccording, setIsAccording] = useState(false);
 
-  function handleLoan() {
-    console.log(name, email, description, puc_id, days);
+  async function handleEquipment() {
+    console.log(name, id, category, description);
+    if (password == password_confirm) {
+      const response = await api.post("register", {
+        name,
+        id,
+        category,
+        description,
+      });
+
+      console.log(response, "response in register");
+    }
   }
 
   function navigateBack() {
@@ -44,74 +49,53 @@ function Equipment() {
           </TouchableOpacity>
         </View>
         <View style={styles.body}>
-          <View style={styles.card}>
-            <View style={styles.cardHeader}>
-              <View style={styles.equipmentImage}>
-                <Image
-                  style={styles.equipmentPhoto}
-                  source={profileImg}
-                ></Image>
-              </View>
-              <View style={styles.equipmentInfo}>
-                <Text style={styles.cardHeaderText}>{equipment.name}</Text>
-                <Text style={styles.cardText}>
-                  Status: {equipment.status ? "Disponível" : "Indisponível"}
-                </Text>
-                <Text style={styles.cardText}>Código: {equipment.id}</Text>
-              </View>
-            </View>
-            <View style={styles.cardBody}>
-              <Text style={styles.label}>Matrícula</Text>
-              <TextInput
-                style={styles.input}
-                value={puc_id}
-                onChangeText={(value) => setPucId(value)}
-                keyboardAppearance="dark"
-                selectionColor="#0A2739"
-                placeholderTextColor="#0A2739"
-              />
-              <Text style={styles.label}>Dias de empréstimo</Text>
-              <TextInput
-                style={styles.input}
-                value={days}
-                onChangeText={(value) => setDays(value)}
-                keyboardAppearance="dark"
-                selectionColor="#0A2739"
-                placeholderTextColor="#0A2739"
-              />
-              <Text style={styles.label}>Descrição</Text>
-              <TextInput
-                style={styles.textArea}
-                value={description}
-                multiline={true}
-                numberOfLines={10}
-                onChangeText={(value) => setDescription(value)}
-                keyboardAppearance="dark"
-                selectionColor="#0A2739"
-                placeholderTextColor="#0A2739"
-              />
-            </View>
-            <View style={styles.cardFooter}>
-              <View style={styles.checkboxContainer}>
-                <Checkbox.Android
-                  status={isAccording ? "checked" : "unchecked"}
-                  onPress={() => setIsAccording(!isAccording)}
-                  style={styles.checkbox}
-                  color="#0A2739"
-                />
-                <Text style={styles.cardFooterText}>
-                  Concordo com os termos de uso.
-                </Text>
-              </View>
-              <TouchableOpacity
-                style={styles.cardFooterButton}
-                onPress={handleLoan}
-              >
-                <Text style={styles.cardFooterButtonText}>
-                  Solicitar empréstimo
-                </Text>
-              </TouchableOpacity>
-            </View>
+          <TextInput
+            style={styles.input}
+            value={name}
+            onChangeText={(value) => setName(value)}
+            placeholder="Nome"
+            keyboardAppearance="dark"
+            selectionColor="#FFF"
+            placeholderTextColor="#CCC"
+          />
+          <TextInput
+            style={styles.input}
+            value={id}
+            onChangeText={(value) => setId(value)}
+            placeholder="Identificação"
+            keyboardAppearance="dark"
+            selectionColor="#FFF"
+            placeholderTextColor="#CCC"
+          />
+          <TextInput
+            style={styles.input}
+            value={category}
+            onChangeText={(value) => setCategory(value)}
+            placeholder="Categoria"
+            keyboardAppearance="dark"
+            selectionColor="#FFF"
+            keyboardType="numeric"
+            placeholderTextColor="#CCC"
+          />
+          <TextInput
+            style={styles.input}
+            value={description}
+            onChangeText={(value) => setDescription(value)}
+            placeholder="Descrição"
+            keyboardAppearance="dark"
+            selectionColor="#FFF"
+            keyboardType="numeric"
+            placeholderTextColor="#CCC"
+          />
+
+          <TouchableOpacity style={styles.register} onPress={handleEquipment}>
+            <Text style={styles.registerText}>Cadastrar equipamento</Text>
+          </TouchableOpacity>
+          <View style={styles.cardLogin}>
+            <TouchableOpacity
+              style={styles.login}
+              onPress={() => navigation.navigate("Logon")}
+            ></TouchableOpacity>
           </View>
         </View>
       </View>

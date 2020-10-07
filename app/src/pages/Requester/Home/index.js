@@ -25,8 +25,11 @@ async function Home() {
   const [name, setName] = useState();
 
   function navigateToDetail(equipment) {
-    console.log(equipment);
     navigation.navigate("RequesterLoan", { equipment });
+  }
+
+  function navigateBack() {
+    navigation.goBack();
   }
 
   const equipments = [
@@ -51,7 +54,12 @@ async function Home() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.back} onPress={navigateBack}>
+          <TouchableOpacity
+            style={styles.back}
+            onPress={() => {
+              navigateBack();
+            }}
+          >
             <Image style={styles.userImage} source={profileImg}></Image>
             <Text style={styles.userName}>{user.name}</Text>
           </TouchableOpacity>

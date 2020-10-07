@@ -5,13 +5,15 @@ import {
   View,
   Image,
   Text,
-  TouchableOpacity,
   TextInput,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  FlatList,
 } from "react-native";
 
-import { Checkbox } from "react-native-paper";
+import { Container, Option } from "../../../components/ScrollView/styles";
+
 import profileImg from "../../../assets/henri-bergson.png";
 
 import styles from "./styles";
@@ -19,88 +21,98 @@ function Home() {
   const navigation = useNavigation();
   const route = useRoute();
   const [name, setName] = useState();
-  const [email, setEmail] = useState();
 
-  const [days, setDays] = useState();
-  const [puc_id, setPucId] = useState();
-  const [description, setDescription] = useState();
-  const [isAccording, setIsAccording] = useState(false);
+  const user = {
+    name: "Bergson Jr.",
+    email: "bergsonjr@icloud.com",
+  };
+
+  function navigateBack() {
+    navigation.goBack();
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.back} onPress={navigateBack}>
-            <Feather name="chevron-left" size={36} color="#FFF"></Feather>
+          <TouchableOpacity
+            style={styles.back}
+            onPress={() => {
+              navigateBack();
+            }}
+          >
+            <Image style={styles.userImage} source={profileImg}></Image>
+            <Text style={styles.userName}>{user.name}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.body}>
-          <View style={styles.card}>
-            <View style={styles.cardHeader}>
-              <View style={styles.equipmentImage}>
-                <Image
-                  style={styles.equipmentPhoto}
-                  source={profileImg}
-                ></Image>
+          <TextInput
+            style={styles.input}
+            value={name}
+            onChangeText={(value) => setName(value)}
+            placeholder="Pesquisar"
+            keyboardAppearance="dark"
+            selectionColor="#FFF"
+            placeholderTextColor="#CCC"
+          />
+
+          <Container>
+            <Option>
+              <View style={styles.card}>
+                <Text style={styles.cardText}>Câmeras</Text>
               </View>
-              <View style={styles.equipmentInfo}>
-                <Text style={styles.cardHeaderText}>{equipment.name}</Text>
-                <Text style={styles.cardText}>
-                  Status: {equipment.status ? "Disponível" : "Indisponível"}
-                </Text>
-                <Text style={styles.cardText}>Código: {equipment.id}</Text>
+            </Option>
+            <Option>
+              <View style={styles.card}>
+                <Text style={styles.cardText}>Tripés</Text>
               </View>
-            </View>
-            <View style={styles.cardBody}>
-              <Text style={styles.label}>Matrícula</Text>
-              <TextInput
-                style={styles.input}
-                value={puc_id}
-                onChangeText={(value) => setPucId(value)}
-                keyboardAppearance="dark"
-                selectionColor="#0A2739"
-                placeholderTextColor="#0A2739"
-              />
-              <Text style={styles.label}>Dias de empréstimo</Text>
-              <TextInput
-                style={styles.input}
-                value={days}
-                onChangeText={(value) => setDays(value)}
-                keyboardAppearance="dark"
-                selectionColor="#0A2739"
-                placeholderTextColor="#0A2739"
-              />
-              <Text style={styles.label}>Descrição</Text>
-              <TextInput
-                style={styles.textArea}
-                value={description}
-                multiline={true}
-                numberOfLines={10}
-                onChangeText={(value) => setDescription(value)}
-                keyboardAppearance="dark"
-                selectionColor="#0A2739"
-                placeholderTextColor="#0A2739"
-              />
-            </View>
-            <View style={styles.cardFooter}>
-              <View style={styles.checkboxContainer}>
-                <Checkbox.Android
-                  status={isAccording ? "checked" : "unchecked"}
-                  onPress={() => setIsAccording(!isAccording)}
-                  style={styles.checkbox}
-                  color="#0A2739"
-                />
-                <Text style={styles.cardFooterText}>
-                  Concordo com os termos de uso.
-                </Text>
+            </Option>
+            <Option>
+              <View style={styles.card}>
+                <Text style={styles.cardText}>Lentes</Text>
               </View>
+            </Option>
+            <Option>
+              <View style={styles.card}>
+                <Text style={styles.cardText}>Rebatedores</Text>
+              </View>
+            </Option>
+          </Container>
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              marginTop: 50,
+              flexWrap: "wrap",
+            }}
+          >
+            <View style={styles.cardCategory}>
               <TouchableOpacity
-                style={styles.cardFooterButton}
-                onPress={handleLoan}
+                onPress={() => {
+                  navigation.navigate("ApproverEquipments");
+                }}
               >
-                <Text style={styles.cardFooterButtonText}>
-                  Solicitar empréstimo
-                </Text>
+                <Text style={styles.cardText}>Câmeras</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.cardCategory}>
+              <TouchableOpacity>
+                <Text style={styles.cardText}>Tripés</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.cardCategory}>
+              <TouchableOpacity>
+                <Text style={styles.cardText}>Lentes</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.cardCategory}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("ApproverRequests");
+                }}
+              >
+                <Text style={styles.cardText}>Solicitações</Text>
               </TouchableOpacity>
             </View>
           </View>

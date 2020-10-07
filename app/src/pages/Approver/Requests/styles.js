@@ -67,10 +67,10 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  equipmentList: {
+  requestList: {
     margin: 8,
   },
-  equipment: {
+  request: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-around",
@@ -81,37 +81,37 @@ export default StyleSheet.create({
     borderRadius: 8,
     backgroundColor: "#D7EEFC",
   },
-  equipmentName: {
+  requestName: {
     fontSize: 16,
     fontWeight: "bold",
   },
-  equipmentProperty: {
+  requestProperty: {
     fontSize: 14,
     fontWeight: "500",
   },
-  equipmentValue: {
+  requestValue: {
     fontSize: 14,
     fontWeight: "300",
   },
   detailsButton: {},
-  equipmentImage: {
+  requestImage: {
     alignContent: "flex-start",
     justifyContent: "center",
     marginLeft: 20,
     width: "20%",
   },
-  equipmentInfo: {
+  requestInfo: {
     alignContent: "flex-start",
     justifyContent: "center",
     marginLeft: 10,
     width: "60%",
   },
-  equipmentDetail: {
+  requestDetail: {
     alignContent: "flex-end",
     justifyContent: "center",
     width: "15%",
   },
-  equipmentPhoto: {
+  requestPhoto: {
     width: 60,
     height: 60,
     borderRadius: 8,

@@ -28,13 +28,16 @@ function Logon() {
   const handleLogin = async (login, password) => {
     try {
       console.log(login, password);
+      /*
       const { data } = await api.post("session", {
         login,
         password,
       });
 
       const { user, auth, token } = data;
-      signIn({ user, auth, token });
+      */
+      // signIn({ user, auth, token });
+      navigation.navigate("ApproverHome");
     } catch (error) {
       console.log(error, "error in session");
     }

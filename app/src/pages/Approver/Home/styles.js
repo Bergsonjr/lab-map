@@ -58,6 +58,19 @@ export default StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#D7EEFC",
   },
+  categories: {
+    marginTop: 50,
+  },
+  cardCategory: {
+    width: "50%",
+    height: 150,
+    borderColor: "#ccc",
+    borderWidth: 2,
+    margin: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#D7EEFC",
+  },
   cardText: {
     color: "#0A2739",
     fontWeight: "bold",

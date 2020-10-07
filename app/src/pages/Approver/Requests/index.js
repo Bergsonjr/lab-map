@@ -5,8 +5,8 @@ import {
   View,
   Image,
   Text,
-  TouchableOpacity,
   TextInput,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
   FlatList,
@@ -17,132 +17,69 @@ import { Container, Option } from "../../../components/ScrollView/styles";
 import profileImg from "../../../assets/henri-bergson.png";
 
 import styles from "./styles";
-
-import AsyncStorage from "@react-native-community/async-storage";
-async function Requests() {
+function Requests() {
   const navigation = useNavigation();
   const route = useRoute();
-  console.log(await AsyncStorage.getItem("user"))
-  const user = JSON.parse(await AsyncStorage.getItem("user"));
   const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [phone, setPhone] = useState();
-  const [puc_id, setPucId] = useState();
-  const [password, setPassword] = useState();
-  const [password_confirm, setPasswordConfirm] = useState();
-
-  function handleRegister() {
-    console.log(name, email, phone, puc_id, password, password_confirm);
-  }
 
   function navigateBack() {
     navigation.goBack();
   }
 
-  function navigateToDetail(equipment) {
-    console.log(equipment);
-    navigation.navigate("RequesterLoan", { equipment });
-  }
-
-  const equipments = [
+  const requests = [
     {
       id: "82900SA",
-      name: "Sony Alpha a6400",
-      status: 1,
+      equipment: "Sony Alpha a6400",
+      requester: "Bergson Junior",
     },
     {
       id: "8522CA",
-      name: "Canon EOS 6D Mark II",
-      status: 0,
+      equipment: "Canon EOS 6D Mark II",
+      requester: "Daniel Augusto",
     },
     {
       id: "86209NK",
-      name: "Nikon D750",
-      status: 1,
+      equipment: "Nikon D750",
+      requester: "Diego Almeida",
     },
   ];
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.back} onPress={navigateBack}>
-            <Image style={styles.userImage} source={profileImg}></Image>
-            <Text style={styles.userName}>{user.name}</Text>
-          </TouchableOpacity>
-        </View>
         <View style={styles.body}>
-          <TextInput
-            style={styles.input}
-            value={name}
-            onChangeText={(value) => setName(value)}
-            placeholder="Pesquisar"
-            keyboardAppearance="dark"
-            selectionColor="#FFF"
-            placeholderTextColor="#CCC"
-          />
-
-          <Container>
-            <Option>
-              <View style={styles.card}>
-                <Text style={styles.cardText}>Câmeras</Text>
-              </View>
-            </Option>
-            <Option>
-              <View style={styles.card}>
-                <Text style={styles.cardText}>Tripés</Text>
-              </View>
-            </Option>
-            <Option>
-              <View style={styles.card}>
-                <Text style={styles.cardText}>Lentes</Text>
-              </View>
-            </Option>
-            <Option>
-              <View style={styles.card}>
-                <Text style={styles.cardText}>Rebatedores</Text>
-              </View>
-            </Option>
-          </Container>
-
           <FlatList
-            data={equipments}
-            style={styles.equipmentList}
-            keyExtractor={(equipment) => String(equipment.id)}
+            data={requests}
+            style={styles.requestList}
+            keyExtractor={(request) => String(request.id)}
             showsVerticalScrollIndicator={false}
             onEndReached={() => {}}
             onEndReachedThreshold={0.2}
-            renderItem={({ item: equipment }) => (
-              <View style={styles.equipment}>
-                <View style={styles.equipmentImage}>
+            renderItem={({ item: request }) => (
+              <View style={styles.request}>
+                <View style={styles.requestImage}>
                   <Image
-                    style={styles.equipmentPhoto}
+                    style={styles.requestPhoto}
                     source={profileImg}
                   ></Image>
                 </View>
-                <View style={styles.equipmentInfo}>
-                  <Text style={styles.equipmentName}>{equipment.name}</Text>
-                  <Text style={styles.equipmentProperty}>
-                    Código:
-                    <Text style={styles.equipmentValue}> {equipment.id}</Text>
+                <View style={styles.requestInfo}>
+                  <Text style={styles.requestName}>{request.requester}</Text>
+                  <Text style={styles.requestProperty}>
+                    Equipamento:
+                    <Text style={styles.requestValue}>{request.request}</Text>
                   </Text>
-                  <Text style={styles.equipmentProperty}>
-                    Status:
-                    <Text style={styles.equipmentValue}>
-                      {equipment.status ? "Disponível" : "Indisponível"}
-                    </Text>
+                  <Text style={styles.requestProperty}>
+                    Código:
+                    <Text style={styles.requestValue}>{request.id}</Text>
                   </Text>
                 </View>
 
-                <View
-                  style={styles.equipmentDetail}
-                  opacity={equipment.status ? 1 : 0.5}
-                >
+                <View style={styles.requestDetail}>
                   <TouchableOpacity
                     style={styles.detailsButton}
-                    disabled={!equipment.status}
                     onPress={() => {
-                      navigateToDetail(equipment);
+                      navigateToDetail(request);
                     }}
                   >
                     <Feather
