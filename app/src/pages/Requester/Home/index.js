@@ -17,13 +17,18 @@ import { Container, Option } from "../../../components/ScrollView/styles";
 import profileImg from "../../../assets/henri-bergson.png";
 import { getItem } from "../../../utils";
 import styles from "./styles";
-async function Home() {
+
+function Home() {
   const navigation = useNavigation();
   const route = useRoute();
-  const storage = await getItem("user");
-  console.log(storage, "storage in home");
   const [name, setName] = useState();
+  const [user, setUser] = useState({});
 
+  const load = async () => {
+    const data = await getItem("user");
+    setUser(data);
+  };
+  
   function navigateToDetail(equipment) {
     navigation.navigate("RequesterLoan", { equipment });
   }
@@ -49,6 +54,8 @@ async function Home() {
       status: 1,
     },
   ];
+
+  load();
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

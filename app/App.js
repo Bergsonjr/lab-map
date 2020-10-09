@@ -27,24 +27,6 @@ const RootStackScreen = ({ navigation }) => (
     <RootStack.Screen name="Logon" component={Logon}></RootStack.Screen>
     <RootStack.Screen name="Recover" component={Recover}></RootStack.Screen>
     <RootStack.Screen name="Register" component={Register}></RootStack.Screen>
-
-    <RootStack.Screen
-      name="ApproverHome"
-      component={ApproverHome}
-    ></RootStack.Screen>
-    <RootStack.Screen name="ApproverRequests" component={ApproverRequests}></RootStack.Screen>
-    <RootStack.Screen name="ApproverEquipments" component={ApproverEquipments}></RootStack.Screen>
-
-    {/*
-    <RootStack.Screen
-      name="RequesterHome"
-      component={RequesterHome}
-    ></RootStack.Screen>
-    <RootStack.Screen name="RequesterLoan" component={RequesterLoan}></RootStack.Screen>
-    
-    <RootStack.Screen name="ApproverRequests" component={ApproverRequests}></RootStack.Screen>
-    
-    */}
   </RootStack.Navigator>
 );
 
@@ -140,10 +122,6 @@ export default function App() {
       try {
         console.log(loginState, "loginState");
         console.log(await getItem("user"), "user storage");
-
-        //REMOVE:
-        await removeItem("user");
-        await removeItem("token");
 
         const [user, token] = await Promise.all([
           getItem("user"),

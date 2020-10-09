@@ -67,7 +67,7 @@ function Requests() {
                   <Text style={styles.requestName}>{request.requester}</Text>
                   <Text style={styles.requestProperty}>
                     Equipamento:
-                    <Text style={styles.requestValue}>{request.request}</Text>
+                    <Text style={styles.requestValue}>{request.equipment}</Text>
                   </Text>
                   <Text style={styles.requestProperty}>
                     Código:

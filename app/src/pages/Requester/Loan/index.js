@@ -18,7 +18,7 @@ import styles from "./styles";
 function Lend() {
   const navigation = useNavigation();
   const route = useRoute();
-  // const equipment = route.params.equipment;
+  const equipment = route.params.equipment;
   const [name, setName] = useState();
   const [email, setEmail] = useState();
 
