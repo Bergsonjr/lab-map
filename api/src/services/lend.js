@@ -1,3 +1,0 @@
-const approveLend = () => {}
-
-const reproveLend = () => {}
