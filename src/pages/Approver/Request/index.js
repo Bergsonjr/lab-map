@@ -16,6 +16,8 @@ import profileImg from "../../../assets/henri-bergson.png";
 import styles from "./styles";
 
 import api from "../../../service/api";
+
+import { getItem } from "../../../utils";
 function Request() {
   const navigation = useNavigation();
   const route = useRoute();
@@ -27,13 +29,22 @@ function Request() {
   const [description, setDescription] = useState();
 
   async function load() {
-    const loan = await api.get(`lend/${request.id}`, {
-      headers: {
-        "x-access-token": await getItem("token"),
-      },
-    });
+    try {
+      console.log(request);
+      setDescription(request.equipment);
+      setDays(request.days);
+      setPucId(request.id);
+      const auth = await getItem("token");
+      const loan = await api({
+        method: "get",
+        url: `lend/${request.code}`,
+        headers: {
+          "x-access-token": auth,
+        },
+      });
 
-    console.log(loan, "loan request");
+      console.log(loan, "loan request");
+    } catch (error) {}
   }
 
   console.log(request);
@@ -67,7 +78,7 @@ function Request() {
                 ></Image>
               </View>
               <View style={styles.equipmentInfo}>
-                <Text style={styles.cardHeaderText}>{request.name}</Text>
+                <Text style={styles.cardHeaderText}>{request.equipment}</Text>
                 <Text style={styles.cardText}>
                   Status: {request.status ? "Disponível" : "Indisponível"}
                 </Text>

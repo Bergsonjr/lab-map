@@ -17,8 +17,12 @@ import { Container, Option } from "../../../components/ScrollView/styles";
 
 import profileImg from "../../../assets/henri-bergson.png";
 
+import { AuthContext } from "../../../components/Context";
+
 import styles from "./styles";
 function Home() {
+  const { signOut } = React.useContext(AuthContext);
+
   const navigation = useNavigation();
   const route = useRoute();
   const [name, setName] = useState();
@@ -36,12 +40,7 @@ function Home() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.back}
-            onPress={() => {
-              navigateBack();
-            }}
-          >
+          <TouchableOpacity style={styles.back} onPress={signOut}>
             <Image style={styles.userImage} source={profileImg}></Image>
             <Text style={styles.userName}>{user.name}</Text>
           </TouchableOpacity>
@@ -58,7 +57,7 @@ function Home() {
             <TouchableOpacity
               style={styles.cardCategory}
               onPress={() => {
-                navigation.navigate("ApproverEquipments");
+                navigation.navigate("ApproverEquipments", { id_category: 1 });
               }}
             >
               <ImageBackground
@@ -70,7 +69,7 @@ function Home() {
             <TouchableOpacity
               style={styles.cardCategory}
               onPress={() => {
-                navigation.navigate("ApproverEquipments");
+                navigation.navigate("ApproverEquipments", { id_category: 2 });
               }}
             >
               <ImageBackground
@@ -82,24 +81,24 @@ function Home() {
             <TouchableOpacity
               style={styles.cardCategory}
               onPress={() => {
-                navigation.navigate("ApproverEquipments");
+                navigation.navigate("ApproverRequests", { id_category: 3 });
               }}
             >
               <ImageBackground
                 style={styles.cardPhoto}
-                source={require("../../../assets/lentes.jpg")}
+                source={require("../../../assets/solic.png")}
               ></ImageBackground>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.cardCategory}
               onPress={() => {
-                navigation.navigate("ApproverRequests");
+                navigation.navigate("ApproverEquipments", { id_category: 4 });
               }}
             >
               <ImageBackground
                 style={styles.cardPhoto}
-                source={require("../../../assets/solic.png")}
+                source={require("../../../assets/lentes.jpg")}
               ></ImageBackground>
             </TouchableOpacity>
           </View>

@@ -14,6 +14,9 @@ import {
 import styles from "./styles";
 
 import api from "../../service/api";
+
+import Toast from "react-native-toast-message";
+
 function Register() {
   const navigation = useNavigation();
 
@@ -25,17 +28,53 @@ function Register() {
   const [password_confirm, setPasswordConfirm] = useState();
 
   async function handleRegister() {
-    console.log(name, email, phone, login, password, password_confirm);
-    if (password == password_confirm) {
-      const response = await api.post("register", {
-        name,
-        email,
-        phone,
-        login,
-        password,
-      });
+    try {
+      console.log(name, email, phone, login, password, password_confirm);
+      if (password == password_confirm) {
+        const response = await api.post("register", {
+          name,
+          email,
+          phone,
+          login,
+          password,
+        });
 
-      console.log(response, "response in register");
+        console.log(response, "response in register");
+        /*
+        Toast.show({
+          text1: "Cadastro realizado com sucesso!",
+          autoHide: true,
+          visibilityTime: 2000,
+          position: "top",
+          type: "success",
+          onHide: () => {
+            navigateBack();
+          },
+        });*/
+      } else {
+        /*
+        Toast.show({
+          text1: "Erro",
+          text2: "Dados inválidos!",
+          autoHide: true,
+          visibilityTime: 2000,
+          position: "top",
+          type: "error",
+        });
+        */
+      }
+    } catch (error) {
+      console.log(error, "error in register");
+      /*
+      Toast.show({
+        text1: "Erro",
+        text2: "Dados inválidos!",
+        autoHide: true,
+        visibilityTime: 2000,
+        position: "top",
+        type: "error",
+      });
+      */
     }
   }
 
@@ -84,10 +123,9 @@ function Register() {
             style={styles.input}
             value={login}
             onChangeText={(value) => setLogin(value)}
-            placeholder="Matrícula"
+            placeholder="Login"
             keyboardAppearance="dark"
             selectionColor="#FFF"
-            keyboardType="numeric"
             placeholderTextColor="#CCC"
           />
           <TextInput

@@ -139,7 +139,7 @@ export default function App() {
           type: "RETRIEVE_TOKEN",
           token,
           user,
-          admin: user.admin,
+          admin: user ? user.admin : null,
         });
       } catch (error) {
         console.log(error, "error in useEffect retrieve");

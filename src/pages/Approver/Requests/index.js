@@ -14,17 +14,38 @@ import {
 import profileImg from "../../../assets/henri-bergson.png";
 
 import styles from "./styles";
+
+import api from "../../../service/api";
+
+import { getItem } from "../../../utils";
 function Requests() {
   const navigation = useNavigation();
+  const [requests, setRequests] = useState([]);
 
   function navigateBack() {
     navigation.goBack();
+  }
+
+  async function load() {
+    try {
+      const auth = await getItem("token");
+      const response = await api.get("/lend", {
+        headers: {
+          "x-access-token": auth,
+        },
+      });
+
+      setRequests(response.data);
+    } catch (error) {
+      console.log("error in load requests");
+    }
   }
 
   function navigateToDetail(request) {
     navigation.navigate("Request", { request });
   }
 
+  /*
   const requests = [
     {
       id: 1,
@@ -45,6 +66,9 @@ function Requests() {
       requester: "Diego Almeida",
     },
   ];
+  */
+
+  load();
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

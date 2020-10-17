@@ -16,23 +16,23 @@ import styles from "./styles";
 import api from "../../../service/api";
 function Equipment() {
   const navigation = useNavigation();
-
+  const route = useRoute();
   const [name, setName] = useState();
   const [id, setId] = useState();
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState(route.params.category_id);
   const [description, setDescription] = useState();
 
   async function handleEquipment() {
     console.log(name, id, category, description);
     if (password == password_confirm) {
-      const response = await api.post("register", {
+      const response = await api.post("equipment", {
         name,
         id,
         category,
         description,
       });
 
-      console.log(response, "response in register");
+      console.log(response, "response in equipments");
     }
   }
 
@@ -68,7 +68,7 @@ function Equipment() {
             placeholderTextColor="#CCC"
           />
           <TextInput
-            style={styles.input}
+            style={styles.inputNotEditable}
             value={category}
             onChangeText={(value) => setCategory(value)}
             placeholder="Categoria"
@@ -76,6 +76,7 @@ function Equipment() {
             selectionColor="#FFF"
             keyboardType="numeric"
             placeholderTextColor="#CCC"
+            editable={false}
           />
           <TextInput
             style={styles.input}
