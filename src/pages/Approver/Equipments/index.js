@@ -14,6 +14,8 @@ import {
 import styles from "./styles";
 
 import api from "../../../service/api";
+
+import Toast from "react-native-tiny-toast";
 function Equipment() {
   const navigation = useNavigation();
   const route = useRoute();
@@ -23,16 +25,52 @@ function Equipment() {
   const [description, setDescription] = useState();
 
   async function handleEquipment() {
-    console.log(name, id, category, description);
-    if (password == password_confirm) {
-      const response = await api.post("equipment", {
-        name,
-        id,
-        category,
-        description,
-      });
+    try {
+      console.log(name, id, category, description);
+      if (name && id && category && description) {
+        const response = await api.post("equipment", {
+          name,
+          id,
+          category,
+          description,
+        });
 
-      console.log(response, "response in equipments");
+        console.log(response, "response in equipments");
+        Toast.showSuccess("Cadastro efetuado");
+        navigateBack();
+      } else {
+        Toast.show("Dados inválidos!", {
+          position: Toast.position.center,
+          containerStyle: {
+            backgroundColor: "#f00",
+            borderRadius: 15,
+          },
+          textStyle: {
+            color: "#fff",
+          },
+          imgStyle: {},
+          mask: false,
+          maskStyle: {},
+          duration: 2000,
+          animation: true,
+        });
+      }
+    } catch (error) {
+      Toast.show("Algo de errado aconteceu", {
+        position: Toast.position.center,
+        containerStyle: {
+          backgroundColor: "#f00",
+          borderRadius: 15,
+        },
+        textStyle: {
+          color: "#fff",
+        },
+        imgStyle: {},
+        mask: false,
+        maskStyle: {},
+        duration: 2000,
+        animation: true,
+      });
     }
   }
 

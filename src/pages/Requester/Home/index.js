@@ -20,11 +20,14 @@ import styles from "./styles";
 
 import api from "../../../service/api";
 
+import { AuthContext } from "../../../components/Context";
+
 function Home() {
   const navigation = useNavigation();
   const [name, setName] = useState();
   const [user, setUser] = useState({});
   const [equipments, setEquipments] = useState({});
+  const { signOut } = React.useContext(AuthContext);
 
   const load = async () => {
     const data = await getItem("user");
@@ -82,12 +85,7 @@ function Home() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.back}
-            onPress={() => {
-              navigateBack();
-            }}
-          >
+          <TouchableOpacity style={styles.back} onPress={signOut}>
             <Image style={styles.userImage} source={profileImg}></Image>
             <Text style={styles.userName}>{user.name}</Text>
           </TouchableOpacity>
@@ -150,6 +148,7 @@ function Home() {
                 style={styles.equipmentList}
                 keyExtractor={(equipment) => String(equipment.id)}
                 showsVerticalScrollIndicator={false}
+                initialNumToRender={equipments.length}
                 onEndReached={() => {}}
                 onEndReachedThreshold={0.2}
                 renderItem={({ item: equipment }) => (
@@ -183,7 +182,7 @@ function Home() {
                     >
                       <TouchableOpacity
                         style={styles.detailsButton}
-                        disabled={!equipment.status}
+                        disabled={equipment.status}
                         onPress={() => {
                           navigateToDetail(equipment);
                         }}

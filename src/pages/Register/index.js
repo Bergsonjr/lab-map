@@ -15,7 +15,7 @@ import styles from "./styles";
 
 import api from "../../service/api";
 
-import Toast from "react-native-toast-message";
+import Toast from "react-native-tiny-toast";
 
 function Register() {
   const navigation = useNavigation();
@@ -40,41 +40,47 @@ function Register() {
         });
 
         console.log(response, "response in register");
-        /*
-        Toast.show({
-          text1: "Cadastro realizado com sucesso!",
-          autoHide: true,
-          visibilityTime: 2000,
-          position: "top",
-          type: "success",
-          onHide: () => {
-            navigateBack();
-          },
-        });*/
-      } else {
-        /*
-        Toast.show({
-          text1: "Erro",
-          text2: "Dados inválidos!",
-          autoHide: true,
-          visibilityTime: 2000,
-          position: "top",
-          type: "error",
+        Toast.showSuccess("Cadastro efetuado", {
+          position: Toast.position.center,
+          duration: 2000,
+          animation: true,
         });
-        */
+
+        navigateBack();
+      } else {
+        Toast.show("Dados inválidos!", {
+          position: Toast.position.center,
+          containerStyle: {
+            backgroundColor: "#f00",
+            borderRadius: 15,
+          },
+          textStyle: {
+            color: "#fff",
+          },
+          imgStyle: {},
+          mask: false,
+          maskStyle: {},
+          duration: 2000,
+          animation: true,
+        });
       }
     } catch (error) {
       console.log(error, "error in register");
-      /*
-      Toast.show({
-        text1: "Erro",
-        text2: "Dados inválidos!",
-        autoHide: true,
-        visibilityTime: 2000,
-        position: "top",
-        type: "error",
+      Toast.show("Algo de errado aconteceu!", {
+        position: Toast.position.center,
+        containerStyle: {
+          backgroundColor: "#f00",
+          borderRadius: 15,
+        },
+        textStyle: {
+          color: "#fff",
+        },
+        imgStyle: {},
+        mask: false,
+        maskStyle: {},
+        duration: 2000,
+        animation: true,
       });
-      */
     }
   }
 

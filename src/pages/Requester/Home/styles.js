@@ -69,6 +69,7 @@ export default StyleSheet.create({
   },
   equipmentList: {
     margin: 8,
+    flex: 0,
   },
   equipment: {
     flex: 1,
@@ -98,18 +99,18 @@ export default StyleSheet.create({
     alignContent: "flex-start",
     justifyContent: "center",
     marginLeft: 20,
-    width: '20%',
+    width: "20%",
   },
   equipmentInfo: {
     alignContent: "flex-start",
     justifyContent: "center",
     marginLeft: 10,
-    width: '60%',
+    width: "60%",
   },
   equipmentDetail: {
     alignContent: "flex-end",
     justifyContent: "center",
-    width: '15%',
+    width: "15%",
   },
   equipmentPhoto: {
     width: 60,

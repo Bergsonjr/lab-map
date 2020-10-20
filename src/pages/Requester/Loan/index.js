@@ -16,6 +16,9 @@ import profileImg from "../../../assets/henri-bergson.png";
 
 import styles from "./styles";
 import { getItem } from "../../../utils";
+import api from "../../../service/api";
+
+import Toast from "react-native-tiny-toast";
 
 function Lend() {
   const navigation = useNavigation();
@@ -28,14 +31,64 @@ function Lend() {
   const [isAccording, setIsAccording] = useState(false);
 
   async function handleLoan() {
-    if (days && puc_id && description) {
-      const lend = {
-        id_equipment: equipment.id,
-        id_requester: await getItem("user").id,
-        description,
-        days,
-      };
-    } else {
+    try {
+      if (days && puc_id && description) {
+        const requester = await getItem("user");
+
+        const lend = {
+          id_equipment: equipment.id,
+          id_requester: requester.id,
+          description,
+          days,
+        };
+
+        console.log(lend, "lend");
+
+        const auth = await getItem("token");
+        const data = await api("/lend", {
+          headers: {
+            "x-access-token": auth,
+          },
+          method: "post",
+        });
+
+        console.log(data, "data");
+        Toast.showSuccess("Solicitação feita!");
+        navigateBack();
+      } else {
+        Toast.show("Dados inválidos!", {
+          position: Toast.position.center,
+          containerStyle: {
+            backgroundColor: "#f00",
+            borderRadius: 15,
+          },
+          textStyle: {
+            color: "#fff",
+          },
+          imgStyle: {},
+          mask: false,
+          maskStyle: {},
+          duration: 2000,
+          animation: true,
+        });
+      }
+    } catch (error) {
+      Toast.show("Algo de errado aconteceu!", {
+        position: Toast.position.center,
+        containerStyle: {
+          backgroundColor: "#f00",
+          borderRadius: 15,
+        },
+        textStyle: {
+          color: "#fff",
+        },
+        imgStyle: {},
+        mask: false,
+        maskStyle: {},
+        duration: 2000,
+        animation: true,
+      });
+      console.log(error, "error in lend");
     }
   }
 

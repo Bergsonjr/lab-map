@@ -121,9 +121,6 @@ export default function App() {
   useEffect(() => {
     setTimeout(async () => {
       try {
-        console.log(loginState, "loginState");
-        console.log(await getItem("user"), "user storage");
-
         /*
         await removeItem("user");
         await removeItem("admin");

@@ -18,6 +18,8 @@ import logoImg from "../../assets/logo.png";
 
 import api from "../../service/api";
 
+import Toast from "react-native-tiny-toast";
+
 function Logon() {
   const navigation = useNavigation();
   const [login, setLogin] = useState("");
@@ -36,7 +38,21 @@ function Logon() {
 
       signIn({ user, auth, token });
     } catch (error) {
-      console.log(error, "error in session");
+      Toast.show("Dados inválidos!", {
+        position: Toast.position.center,
+        containerStyle: {
+          backgroundColor: "#f00",
+          borderRadius: 15,
+        },
+        textStyle: {
+          color: "#fff",
+        },
+        imgStyle: {},
+        mask: false,
+        maskStyle: {},
+        duration: 2000,
+        animation: true,
+      });
     }
   };
 
