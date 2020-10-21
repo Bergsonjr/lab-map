@@ -39,54 +39,52 @@ function Lend() {
           id_equipment: equipment.id,
           id_requester: requester.id,
           description,
-          days,
+          days: Number(days),
         };
-
-        console.log(lend, "lend");
 
         const auth = await getItem("token");
         const data = await api("/lend", {
           headers: {
             "x-access-token": auth,
           },
+          data: lend,
           method: "post",
         });
 
         console.log(data, "data");
-        Toast.showSuccess("Solicitação feita!");
-        navigateBack();
-      } else {
-        Toast.show("Dados inválidos!", {
-          position: Toast.position.center,
+        Toast.show("Solicitação feita!", {
           containerStyle: {
-            backgroundColor: "#f00",
-            borderRadius: 15,
+            backgroundColor: "#006633",
+            borderRadius: 8,
           },
           textStyle: {
             color: "#fff",
           },
-          imgStyle: {},
-          mask: false,
-          maskStyle: {},
           duration: 2000,
-          animation: true,
+        });
+        navigateBack();
+      } else {
+        Toast.show("Dados inválidos!", {
+          containerStyle: {
+            backgroundColor: "#f00",
+            borderRadius: 8,
+          },
+          textStyle: {
+            color: "#fff",
+          },
+          duration: 2000,
         });
       }
     } catch (error) {
       Toast.show("Algo de errado aconteceu!", {
-        position: Toast.position.center,
         containerStyle: {
           backgroundColor: "#f00",
-          borderRadius: 15,
+          borderRadius: 8,
         },
         textStyle: {
           color: "#fff",
         },
-        imgStyle: {},
-        mask: false,
-        maskStyle: {},
         duration: 2000,
-        animation: true,
       });
       console.log(error, "error in lend");
     }
@@ -116,7 +114,8 @@ function Lend() {
               <View style={styles.equipmentInfo}>
                 <Text style={styles.cardHeaderText}>{equipment.name}</Text>
                 <Text style={styles.cardText}>
-                  Status: {equipment.status ? "Disponível" : "Indisponível"}
+                  Status:{" "}
+                  {Boolean(equipment.id_status) ? "Disponível" : "Indisponível"}
                 </Text>
                 <Text style={styles.cardText}>Código: {equipment.id}</Text>
               </View>

@@ -20,7 +20,7 @@ import Toast from "react-native-tiny-toast";
 function Register() {
   const navigation = useNavigation();
 
-  const [name, setName] = useState();
+  const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState();
   const [login, setLogin] = useState();
@@ -29,10 +29,10 @@ function Register() {
 
   async function handleRegister() {
     try {
-      console.log(name, email, phone, login, password, password_confirm);
+      console.log(username, email, phone, login, password, password_confirm);
       if (password == password_confirm) {
         const response = await api.post("register", {
-          name,
+          username,
           email,
           phone,
           login,
@@ -40,46 +40,41 @@ function Register() {
         });
 
         console.log(response, "response in register");
-        Toast.showSuccess("Cadastro efetuado", {
-          position: Toast.position.center,
+        Toast.show("Cadastro efetuado", {
+          containerStyle: {
+            backgroundColor: "#006633",
+            borderRadius: 8,
+          },
+          textStyle: {
+            color: "#fff",
+          },
           duration: 2000,
-          animation: true,
         });
 
         navigateBack();
       } else {
         Toast.show("Dados inválidos!", {
-          position: Toast.position.center,
           containerStyle: {
             backgroundColor: "#f00",
-            borderRadius: 15,
+            borderRadius: 8,
           },
           textStyle: {
             color: "#fff",
           },
-          imgStyle: {},
-          mask: false,
-          maskStyle: {},
           duration: 2000,
-          animation: true,
         });
       }
     } catch (error) {
       console.log(error, "error in register");
       Toast.show("Algo de errado aconteceu!", {
-        position: Toast.position.center,
         containerStyle: {
           backgroundColor: "#f00",
-          borderRadius: 15,
+          borderRadius: 8,
         },
         textStyle: {
           color: "#fff",
         },
-        imgStyle: {},
-        mask: false,
-        maskStyle: {},
         duration: 2000,
-        animation: true,
       });
     }
   }
@@ -99,8 +94,8 @@ function Register() {
         <View style={styles.body}>
           <TextInput
             style={styles.input}
-            value={name}
-            onChangeText={(value) => setName(value)}
+            value={username}
+            onChangeText={(value) => setUsername(value)}
             placeholder="Nome"
             keyboardAppearance="dark"
             selectionColor="#FFF"

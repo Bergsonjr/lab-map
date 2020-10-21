@@ -18,6 +18,8 @@ import styles from "./styles";
 import api from "../../../service/api";
 
 import { getItem } from "../../../utils";
+
+import Toast from "react-native-tiny-toast";
 function Requests() {
   const navigation = useNavigation();
   const [requests, setRequests] = useState([]);
@@ -29,46 +31,39 @@ function Requests() {
   async function load() {
     try {
       const auth = await getItem("token");
-      const response = await api.get("/lend", {
+      const { data } = await api("/lend", {
         headers: {
           "x-access-token": auth,
         },
       });
 
-      setRequests(response.data);
+      console.log(data.lends);
+      setRequests(data.lends);
+
+      if (!data.lends.length) {
+        Toast.show("Nenhuma solicitação encontrada", {
+          containerStyle: {
+            backgroundColor: "#000",
+            borderRadius: 8,
+          },
+          textStyle: {
+            color: "#fff",
+          },
+          duration: 2000,
+        });
+      }
     } catch (error) {
       console.log("error in load requests");
     }
   }
 
+  useEffect(() => {
+    load();
+  }, []);
+
   function navigateToDetail(request) {
     navigation.navigate("Request", { request });
   }
-
-  /*
-  const requests = [
-    {
-      id: 1,
-      code: "82900SA",
-      equipment: "Sony Alpha a6400",
-      requester: "Bergson Junior",
-    },
-    {
-      id: 2,
-      code: "8522CA",
-      equipment: "Canon EOS 6D Mark II",
-      requester: "Daniel Augusto",
-    },
-    {
-      id: 3,
-      code: "86209NK",
-      equipment: "Nikon D750",
-      requester: "Diego Almeida",
-    },
-  ];
-  */
-
-  load();
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -95,10 +90,10 @@ function Requests() {
                   ></Image>
                 </View>
                 <View style={styles.requestInfo}>
-                  <Text style={styles.requestName}>{request.requester}</Text>
+                  <Text style={styles.requestName}>{request.username}</Text>
                   <Text style={styles.requestProperty}>
                     Equipamento:
-                    <Text style={styles.requestValue}>{request.equipment}</Text>
+                    <Text style={styles.requestValue}>{request.name}</Text>
                   </Text>
                   <Text style={styles.requestProperty}>
                     Código:

@@ -17,24 +17,19 @@ import { Container, Option } from "../../../components/ScrollView/styles";
 
 import profileImg from "../../../assets/henri-bergson.png";
 
+import { getItem } from "../../../utils";
 import { AuthContext } from "../../../components/Context";
 
 import styles from "./styles";
 function Home() {
+  const navigation = useNavigation();
+  const [user, setUser] = useState({});
   const { signOut } = React.useContext(AuthContext);
 
-  const navigation = useNavigation();
-  const route = useRoute();
-  const [name, setName] = useState();
-
-  const user = {
-    name: "Bergson Jr.",
-    email: "bergsonjr@icloud.com",
-  };
-
-  function navigateBack() {
-    navigation.goBack();
-  }
+  (async function () {
+    const data = await getItem("user");
+    setUser(data);
+  })();
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -42,7 +37,7 @@ function Home() {
         <View style={styles.header}>
           <TouchableOpacity style={styles.back} onPress={signOut}>
             <Image style={styles.userImage} source={profileImg}></Image>
-            <Text style={styles.userName}>{user.name}</Text>
+            <Text style={styles.userName}>{user.username}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.body}>

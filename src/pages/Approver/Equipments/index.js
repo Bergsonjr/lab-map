@@ -36,40 +36,39 @@ function Equipment() {
         });
 
         console.log(response, "response in equipments");
-        Toast.showSuccess("Cadastro efetuado");
-        navigateBack();
-      } else {
-        Toast.show("Dados inválidos!", {
-          position: Toast.position.center,
+        Toast.show("Cadastro efetuado", {
           containerStyle: {
-            backgroundColor: "#f00",
-            borderRadius: 15,
+            backgroundColor: "#006633",
+            borderRadius: 8,
           },
           textStyle: {
             color: "#fff",
           },
-          imgStyle: {},
-          mask: false,
-          maskStyle: {},
           duration: 2000,
-          animation: true,
+        });
+        navigateBack();
+      } else {
+        Toast.show("Dados inválidos!", {
+          containerStyle: {
+            backgroundColor: "#f00",
+            borderRadius: 8,
+          },
+          textStyle: {
+            color: "#fff",
+          },
+          duration: 2000,
         });
       }
     } catch (error) {
       Toast.show("Algo de errado aconteceu", {
-        position: Toast.position.center,
         containerStyle: {
           backgroundColor: "#f00",
-          borderRadius: 15,
+          borderRadius: 8,
         },
         textStyle: {
           color: "#fff",
         },
-        imgStyle: {},
-        mask: false,
-        maskStyle: {},
         duration: 2000,
-        animation: true,
       });
     }
   }

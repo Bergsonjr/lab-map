@@ -22,6 +22,8 @@ import api from "../../../service/api";
 
 import { AuthContext } from "../../../components/Context";
 
+import Toast from "react-native-tiny-toast";
+
 function Home() {
   const navigation = useNavigation();
   const [name, setName] = useState();
@@ -38,12 +40,7 @@ function Home() {
     navigation.navigate("RequesterLoan", { equipment });
   }
 
-  function navigateBack() {
-    navigation.goBack();
-  }
-
   async function searchByCategory(id_category) {
-    console.log(id_category, "id_category");
     try {
       const auth = await getItem("token");
       const response = await api(`/equipment/${id_category}`, {
@@ -52,8 +49,18 @@ function Home() {
         },
       });
 
-      console.log(response.data);
       setEquipments(response.data);
+      if (!response.data.length)
+        Toast.show("Nenhum equipamento encontrado", {
+          containerStyle: {
+            backgroundColor: "#000",
+            borderRadius: 8,
+          },
+          textStyle: {
+            color: "#fff",
+          },
+          duration: 2000,
+        });
     } catch (error) {
       console.log("error in searchByCategory", error);
     }
@@ -87,7 +94,7 @@ function Home() {
         <View style={styles.header}>
           <TouchableOpacity style={styles.back} onPress={signOut}>
             <Image style={styles.userImage} source={profileImg}></Image>
-            <Text style={styles.userName}>{user.name}</Text>
+            <Text style={styles.userName}>{user.username}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.body}>
@@ -171,18 +178,21 @@ function Home() {
                       <Text style={styles.equipmentProperty}>
                         Status:
                         <Text style={styles.equipmentValue}>
-                          {!equipment.status ? "Disponível" : "Indisponível"}
+                          {" "}
+                          {Boolean(equipment.id_status)
+                            ? "Disponível"
+                            : "Indisponível"}
                         </Text>
                       </Text>
                     </View>
 
                     <View
                       style={styles.equipmentDetail}
-                      opacity={!equipment.status ? 1 : 0.5}
+                      opacity={Boolean(equipment.id_status) ? 1 : 0.5}
                     >
                       <TouchableOpacity
                         style={styles.detailsButton}
-                        disabled={equipment.status}
+                        disabled={!Boolean(equipment.id_status)}
                         onPress={() => {
                           navigateToDetail(equipment);
                         }}

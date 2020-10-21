@@ -42,8 +42,10 @@ export default function App() {
   const loginReducer = (prevState, action) => {
     switch (action.type) {
       case "RETRIEVE_TOKEN":
+        console.log(prevState, "prevState");
+        console.log(action, "action");
         return {
-          ...prevState,
+          // ...prevState,
           token: action.token,
           admin: action.admin,
           user: action.user,
@@ -60,7 +62,6 @@ export default function App() {
         };
       case "LOGOUT":
         return {
-          ...prevState,
           login: null,
           token: null,
           admin: null,
@@ -88,7 +89,6 @@ export default function App() {
     () => ({
       signIn: async ({ user, auth, token }) => {
         try {
-          console.log(user, "user");
           if (auth) {
             await Promise.all([setItem("token", token), setItem("user", user)]);
           }
@@ -118,30 +118,27 @@ export default function App() {
     []
   );
 
-  useEffect(() => {
-    setTimeout(async () => {
-      try {
-        /*
-        await removeItem("user");
-        await removeItem("admin");
-        await removeItem("token");
-*/
-        const [user, token] = await Promise.all([
-          getItem("user"),
-          getItem("token"),
-        ]);
+  async function retrieve() {
+    try {
+      const [user, token] = await Promise.all([
+        getItem("user"),
+        getItem("token"),
+      ]);
 
-        console.log(token, "token");
-        dispatch({
-          type: "RETRIEVE_TOKEN",
-          token,
-          user,
-          admin: user ? user.admin : null,
-        });
-      } catch (error) {
-        console.log(error, "error in useEffect retrieve");
-      }
-    }, 1000);
+      console.log(token, "token");
+      dispatch({
+        type: "RETRIEVE_TOKEN",
+        token,
+        user,
+        admin: user ? user.admin : null,
+      });
+    } catch (error) {
+      console.log(error, "error in useEffect retrieve");
+    }
+  }
+
+  useEffect(() => {
+    retrieve();
   }, []);
 
   if (loginState.isLoading) {

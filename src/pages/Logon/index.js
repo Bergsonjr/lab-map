@@ -39,19 +39,14 @@ function Logon() {
       signIn({ user, auth, token });
     } catch (error) {
       Toast.show("Dados inválidos!", {
-        position: Toast.position.center,
         containerStyle: {
           backgroundColor: "#f00",
-          borderRadius: 15,
+          borderRadius: 8,
         },
         textStyle: {
           color: "#fff",
         },
-        imgStyle: {},
-        mask: false,
-        maskStyle: {},
         duration: 2000,
-        animation: true,
       });
     }
   };
