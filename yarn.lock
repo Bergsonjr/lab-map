@@ -5409,6 +5409,11 @@ react-native-toast-message@^1.3.4:
   resolved "https://registry.yarnpkg.com/react-native-toast-message/-/react-native-toast-message-1.3.4.tgz#19ea1c5d3ad8e9d12f7550c4719a9e0258dca6bd"
   integrity sha512-83rKaLNC8/JPEPlrONVTurVepIlXKuHnFnxm7mJ58CA3XN4fT6ayRBubs/pd8u980mDFHqo8ysJOSHF3dwPg4g==
 
+react-native-ux-cam@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-ux-cam/-/react-native-ux-cam-5.2.0.tgz#81c9b9d233dd019f372bf665c398342fe5f4a36d"
+  integrity sha512-18iHV52ZfhIHm7JXNUVZxEGfapEyU1YYDsE6rceImKf0Y9dodmWihmV7BVxIM0sgkKFJqqcv1iASkBbGaQvKzQ==
+
 react-native-view-shot@3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/react-native-view-shot/-/react-native-view-shot-3.1.2.tgz#8c8e84c67a4bc8b603e697dbbd59dbc9b4f84825"

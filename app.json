@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "LAB",
+    "name": "LAB APP",
     "slug": "LAB",
     "platforms": [
       "ios",
@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "sdkVersion": "37.0.0",
+    "description": ""
   }
 }

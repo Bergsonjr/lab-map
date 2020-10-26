@@ -24,12 +24,30 @@ import { AuthContext } from "../../../components/Context";
 
 import Toast from "react-native-tiny-toast";
 
+import NikonFM3 from "../../../assets/NikonFM3.jpg";
+import NikonFM2 from "../../../assets/NikonFM2.jpg";
+import NikonD90 from "../../../assets/NikonD90.jpg";
+import NikonD5000 from "../../../assets/NikonD5000.jpg";
+import LenteMicro60 from "../../../assets/LenteMicro60mm.jpg";
+import Lente50 from "../../../assets/Lente50mm.jpg";
+import Tripe from "../../../assets/Tripé.jpg";
+
 function Home() {
   const navigation = useNavigation();
   const [name, setName] = useState();
   const [user, setUser] = useState({});
   const [equipments, setEquipments] = useState({});
   const { signOut } = React.useContext(AuthContext);
+
+  const imgs = {
+    Tripé: Tripe,
+    "Nikon FM3": NikonFM3,
+    "Nikon FM2": NikonFM2,
+    "Nikon D90": NikonD90,
+    "Nikon D5000": NikonD5000,
+    "Lente 50mm": LenteMicro60,
+    "Lente micro 60mm": Lente50,
+  };
 
   const load = async () => {
     const data = await getItem("user");
@@ -163,7 +181,7 @@ function Home() {
                     <View style={styles.equipmentImage}>
                       <Image
                         style={styles.equipmentPhoto}
-                        source={profileImg}
+                        source={imgs[`${equipment.name}`]}
                       ></Image>
                     </View>
                     <View style={styles.equipmentInfo}>
