@@ -21,7 +21,9 @@ function Equipment() {
   const route = useRoute();
   const [name, setName] = useState();
   const [id, setId] = useState();
-  const [category, setCategory] = useState(route.params.category_id);
+  const [category, setCategory] = useState({});
+  setCategory(route.params.category_id);
+
   const [description, setDescription] = useState();
 
   async function handleEquipment() {

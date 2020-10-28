@@ -37,7 +37,6 @@ function Requests() {
         },
       });
 
-      console.log(data.lends);
       setRequests(data.lends);
 
       if (!data.lends.length) {
@@ -97,7 +96,9 @@ function Requests() {
                   </Text>
                   <Text style={styles.requestProperty}>
                     Código:
-                    <Text style={styles.requestValue}>{request.code}</Text>
+                    <Text style={styles.requestValue}>
+                      {request.id_equipment}
+                    </Text>
                   </Text>
                 </View>
 

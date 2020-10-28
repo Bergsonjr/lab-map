@@ -18,47 +18,81 @@ import styles from "./styles";
 import api from "../../../service/api";
 
 import { getItem } from "../../../utils";
+
+import Toast from "react-native-tiny-toast";
 function Request() {
   const navigation = useNavigation();
   const route = useRoute();
 
   const request = route.params.request;
 
-  const [days, setDays] = useState();
-  const [puc_id, setPucId] = useState();
-  const [description, setDescription] = useState();
+  const [days, setDays] = useState({});
+  const [puc_id, setPucId] = useState({});
+  const [description, setDescription] = useState({});
 
-  async function load() {
-    try {
-      console.log(request);
-      setDescription(request.equipment);
-      setDays(request.days);
-      setPucId(request.id);
-      const auth = await getItem("token");
-      const loan = await api({
-        method: "get",
-        url: `lend/${request.code}`,
-        headers: {
-          "x-access-token": auth,
-        },
-      });
+  function load() {
+    setDescription(request.description);
+    setDays(`${request.days}`);
+    setPucId(`${request.id}`);
 
-      console.log(loan, "loan request");
-    } catch (error) {}
+    console.log(request, "request");
   }
 
-  console.log(request);
+  useEffect(() => {
+    load();
+  });
+
   function navigateBack() {
     navigation.goBack();
   }
 
   async function handleLoan(approved) {
-    if (approved) {
-    } else {
+    try {
+      if (approved) {
+        const auth = await getItem("token");
+        const { data } = await api.put("/lend", {
+          headers: {
+            "x-access-token": auth,
+          },
+        });
+
+        console.log(data, "data lend approved");
+      } else {
+        const auth = await getItem("token");
+        const { data } = await api.delete(`/lend/${request.id}`, {
+          headers: {
+            "x-access-token": auth,
+          },
+        });
+
+        console.log(data, "data lend reproved");
+
+        Toast.show("Solicitação reprovada!", {
+          containerStyle: {
+            backgroundColor: "#006633",
+            borderRadius: 8,
+          },
+          textStyle: {
+            color: "#fff",
+          },
+          duration: 2000,
+        });
+
+        navigateBack();
+
+        //notify User
+      }
+    } catch (error) {
+      console.log(error, "error in handleLoan");
     }
   }
 
-  load();
+  async function finishLoan() {
+    try {
+    } catch (error) {
+      console.log(error, "error in finishLoan");
+    }
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -78,11 +112,11 @@ function Request() {
                 ></Image>
               </View>
               <View style={styles.equipmentInfo}>
-                <Text style={styles.cardHeaderText}>{request.equipment}</Text>
+                <Text style={styles.cardHeaderText}>{request.username}</Text>
+                <Text style={styles.cardText}>Equipamento: {request.name}</Text>
                 <Text style={styles.cardText}>
-                  Status: {request.status ? "Disponível" : "Indisponível"}
+                  Código: {request.id_equipment}
                 </Text>
-                <Text style={styles.cardText}>Código: {request.code}</Text>
               </View>
             </View>
             <View style={styles.cardBody}>
@@ -119,20 +153,31 @@ function Request() {
                 editable={false}
               />
             </View>
-            <View style={styles.cardFooter}>
-              <TouchableOpacity
-                style={styles.cardFooterButtonApprove}
-                onPress={() => handleLoan(true)}
-              >
-                <Text style={styles.cardFooterButtonText}>Aprovar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.cardFooterButtonReprove}
-                onPress={() => handleLoan(false)}
-              >
-                <Text style={styles.cardFooterButtonText}>Reprovar</Text>
-              </TouchableOpacity>
-            </View>
+            {request.status == "Pendente" ? (
+              <View style={styles.cardFooter}>
+                <TouchableOpacity
+                  style={styles.cardFooterButtonApprove}
+                  onPress={() => handleLoan(true)}
+                >
+                  <Text style={styles.cardFooterButtonText}>Aprovar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.cardFooterButtonReprove}
+                  onPress={() => handleLoan(false)}
+                >
+                  <Text style={styles.cardFooterButtonText}>Reprovar</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <View style={styles.cardFooter}>
+                <TouchableOpacity
+                  style={styles.cardFooterButtonApprove}
+                  onPress={() => finishLoan()}
+                >
+                  <Text style={styles.cardFooterButtonText}>Finalizar</Text>
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
         </View>
       </View>
