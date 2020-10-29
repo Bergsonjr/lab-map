@@ -31,11 +31,9 @@ function Request() {
   const [description, setDescription] = useState({});
 
   function load() {
-    setDescription(request.description);
+    setDescription(`${request.description}`);
     setDays(`${request.days}`);
     setPucId(`${request.id}`);
-
-    console.log(request, "request");
   }
 
   useEffect(() => {
@@ -50,22 +48,35 @@ function Request() {
     try {
       if (approved) {
         const auth = await getItem("token");
-        const { data } = await api.put("/lend", {
+        const id_approver = (await getItem("user")).id;
+        await api(`/lend/${request.id}`, {
           headers: {
             "x-access-token": auth,
           },
+          data: { id_approver },
+          method: "put",
         });
 
-        console.log(data, "data lend approved");
+        Toast.show("Solicitação aprovada!", {
+          containerStyle: {
+            backgroundColor: "#006633",
+            borderRadius: 8,
+          },
+          textStyle: {
+            color: "#fff",
+          },
+          duration: 2000,
+        });
+
+        //notify User
       } else {
         const auth = await getItem("token");
-        const { data } = await api.delete(`/lend/${request.id}`, {
+        await api(`/lend/${request.id}`, {
           headers: {
             "x-access-token": auth,
           },
+          method: "delete",
         });
-
-        console.log(data, "data lend reproved");
 
         Toast.show("Solicitação reprovada!", {
           containerStyle: {
@@ -78,10 +89,10 @@ function Request() {
           duration: 2000,
         });
 
-        navigateBack();
-
         //notify User
       }
+
+      navigateBack();
     } catch (error) {
       console.log(error, "error in handleLoan");
     }
@@ -89,6 +100,26 @@ function Request() {
 
   async function finishLoan() {
     try {
+      const auth = await getItem("token");
+      await api(`/lend/${request.id}`, {
+        headers: {
+          "x-access-token": auth,
+        },
+        method: "delete",
+      });
+
+      Toast.show("Solicitação finalizada!", {
+        containerStyle: {
+          backgroundColor: "#006633",
+          borderRadius: 8,
+        },
+        textStyle: {
+          color: "#fff",
+        },
+        duration: 2000,
+      });
+
+      navigateBack();
     } catch (error) {
       console.log(error, "error in finishLoan");
     }
@@ -171,7 +202,7 @@ function Request() {
             ) : (
               <View style={styles.cardFooter}>
                 <TouchableOpacity
-                  style={styles.cardFooterButtonApprove}
+                  style={styles.cardFooterButtonFinish}
                   onPress={() => finishLoan()}
                 >
                   <Text style={styles.cardFooterButtonText}>Finalizar</Text>

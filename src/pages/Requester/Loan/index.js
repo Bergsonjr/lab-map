@@ -69,7 +69,6 @@ function Lend() {
           method: "post",
         });
 
-        console.log(data, "data");
         Toast.show("Solicitação feita!", {
           containerStyle: {
             backgroundColor: "#006633",
@@ -104,7 +103,7 @@ function Lend() {
         },
         duration: 2000,
       });
-      console.log(error, "error in lend");
+      console.error(error, "error in lend");
     }
   }
 

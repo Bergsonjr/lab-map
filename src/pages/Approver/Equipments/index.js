@@ -19,16 +19,16 @@ import Toast from "react-native-tiny-toast";
 function Equipment() {
   const navigation = useNavigation();
   const route = useRoute();
-  const [name, setName] = useState();
-  const [id, setId] = useState();
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
   const [category, setCategory] = useState({});
-  setCategory(route.params.category_id);
+  const [description, setDescription] = useState("");
 
-  const [description, setDescription] = useState();
-
+  useEffect(() => {
+    setCategory(`${route.params.id_category}`);
+  });
   async function handleEquipment() {
     try {
-      console.log(name, id, category, description);
       if (name && id && category && description) {
         const response = await api.post("equipment", {
           name,
@@ -37,7 +37,7 @@ function Equipment() {
           description,
         });
 
-        console.log(response, "response in equipments");
+        
         Toast.show("Cadastro efetuado", {
           containerStyle: {
             backgroundColor: "#006633",

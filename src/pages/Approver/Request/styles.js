@@ -110,6 +110,16 @@ export default StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "green",
   },
+  cardFooterButtonFinish: {
+    flex: 1,
+    bottom: 0,
+    width: "100%",
+    height: 50,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#0A2739",
+  },
   cardFooterButtonReprove: {
     marginLeft: 7.5,
     flex: 1,

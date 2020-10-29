@@ -52,7 +52,7 @@ function Requests() {
         });
       }
     } catch (error) {
-      console.log("error in load requests");
+      console.error("error in load requests");
     }
   }
 
@@ -91,11 +91,11 @@ function Requests() {
                 <View style={styles.requestInfo}>
                   <Text style={styles.requestName}>{request.username}</Text>
                   <Text style={styles.requestProperty}>
-                    Equipamento:
+                    Equipamento:{" "}
                     <Text style={styles.requestValue}>{request.name}</Text>
                   </Text>
                   <Text style={styles.requestProperty}>
-                    Código:
+                    Código:{" "}
                     <Text style={styles.requestValue}>
                       {request.id_equipment}
                     </Text>

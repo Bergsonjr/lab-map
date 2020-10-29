@@ -34,7 +34,7 @@ import Tripe from "../../../assets/Tripé.jpg";
 
 function Home() {
   const navigation = useNavigation();
-  const [name, setName] = useState();
+  const [name, setName] = useState("");
   const [user, setUser] = useState({});
   const [equipments, setEquipments] = useState({});
   const { signOut } = React.useContext(AuthContext);
@@ -80,7 +80,7 @@ function Home() {
           duration: 2000,
         });
     } catch (error) {
-      console.log("error in searchByCategory", error);
+      console.error("error in searchByCategory", error);
     }
   }
 

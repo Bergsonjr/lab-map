@@ -49,8 +49,6 @@ export default function App() {
   const loginReducer = (prevState, action) => {
     switch (action.type) {
       case "RETRIEVE_TOKEN":
-        console.log(prevState, "prevState");
-        console.log(action, "action");
         return {
           // ...prevState,
           token: action.token,
@@ -100,7 +98,7 @@ export default function App() {
             await Promise.all([setItem("token", token), setItem("user", user)]);
           }
         } catch (error) {
-          console.log(error, "error in signIn");
+          console.error(error, "error in signIn");
         }
         dispatch({
           type: "LOGIN",
@@ -112,12 +110,10 @@ export default function App() {
       },
       signOut: async () => {
         try {
-          await removeItem("user");
-          await removeItem("admin");
           await removeItem("token");
           dispatch({ type: "LOGOUT" });
         } catch (error) {
-          console.log(error, "error in signOut");
+          console.error(error, "error in signOut");
         }
       },
       signUp: () => {},
@@ -132,7 +128,6 @@ export default function App() {
         getItem("token"),
       ]);
 
-      console.log(token, "token");
       dispatch({
         type: "RETRIEVE_TOKEN",
         token,
@@ -140,7 +135,7 @@ export default function App() {
         admin: user ? user.admin : null,
       });
     } catch (error) {
-      console.log(error, "error in useEffect retrieve");
+      console.error(error, "error in useEffect retrieve");
     }
   }
 

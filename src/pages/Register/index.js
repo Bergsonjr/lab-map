@@ -29,7 +29,6 @@ function Register() {
 
   async function handleRegister() {
     try {
-      console.log(username, email, phone, login, password, password_confirm);
       if (password == password_confirm) {
         const response = await api.post("register", {
           username,
@@ -39,7 +38,6 @@ function Register() {
           password,
         });
 
-        console.log(response, "response in register");
         Toast.show("Cadastro efetuado", {
           containerStyle: {
             backgroundColor: "#006633",
@@ -65,7 +63,6 @@ function Register() {
         });
       }
     } catch (error) {
-      console.log(error, "error in register");
       Toast.show("Algo de errado aconteceu!", {
         containerStyle: {
           backgroundColor: "#f00",
