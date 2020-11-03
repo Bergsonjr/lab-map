@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 
 //Add this on top of App.js
-import RNUxcam from "react-native-ux-cam";
+import RNUxcam from 'react-native-ux-cam';
 RNUxcam.optIntoSchematicRecordings(); // Add this line to enable iOS screen recordings
-RNUxcam.startWithKey("szd5211cnhfq7df"); // Add this line after RNUcam.optIntoSchematicRecordings();
+RNUxcam.startWithKey('2rbnb45ib341pho'); // Add this line after RNUcam.optIntoSchematicRecordings();
 
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
@@ -143,7 +143,14 @@ export default function App() {
 
   if (loginState.isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#0A2739",
+        }}
+      >
         <ActivityIndicator size="large" />
       </View>
     );
