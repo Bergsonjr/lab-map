@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 
 //Add this on top of App.js
-import RNUxcam from 'react-native-ux-cam';
-RNUxcam.optIntoSchematicRecordings(); // Add this line to enable iOS screen recordings
-RNUxcam.startWithKey('2rbnb45ib341pho'); // Add this line after RNUcam.optIntoSchematicRecordings();
+// import RNUxcam from 'react-native-ux-cam';
+// RNUxcam.optIntoSchematicRecordings(); // Add this line to enable iOS screen recordings
+// RNUxcam.startWithKey('2rbnb45ib341pho'); // Add this line after RNUcam.optIntoSchematicRecordings();
 
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
