@@ -4,9 +4,9 @@ import {
   View,
   Image,
   Text,
-  TouchableOpacity,
   TextInput,
   Keyboard,
+  TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native";
 
