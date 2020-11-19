@@ -2,11 +2,7 @@
   "expo": {
     "name": "LAB APP",
     "slug": "LAB",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,11 +14,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.puc.lab",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.puc.lab",
+      "versionCode": 1
     },
     "description": "Aplicativo para a gestão de empréstimos do laboratório de audiovisual e fotografia da PUC Minas"
   }
